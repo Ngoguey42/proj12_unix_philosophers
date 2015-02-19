@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/19 17:44:20 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/02/19 18:33:41 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ typedef struct	s_thread
 {
 	t_env		*e;
 	int			id;
+	time_t		end_time;
 }				t_thread;
 
 /*
