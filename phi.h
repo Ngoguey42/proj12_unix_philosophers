@@ -17,7 +17,7 @@
 
 typedef struct	s_env
 {
-
+	int lol2
 	int lol;
 	int lol2;
 
