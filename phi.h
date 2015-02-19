@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/19 14:06:21 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/02/19 14:17:36 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef enum	s_pstat
 
 typedef enum	s_sstat
 {
-	free = 0,
+	available = 0,
 	left = 2,
 	right = 3,
 }				t_sstat;
@@ -48,13 +48,19 @@ typedef enum	s_sstat
 **		's'			screen image datas.
 */
 
-# define WINX	1600
+# define WINX	1000
 # define RATIO	(4. / 3.)
 # define WIN_X	(int)(WINX)
 # define WIN_Y	(int)((double)WIN_X / RATIO)
 
+# define TABLE_LEFTPAD 300
+# define TABLE_TOPPAD 300
+# define TABLE_RADIUS 300
+
+
 typedef struct	s_graph
-{	
+{
+	int			redraw;
 	void		*serv;
 	void		*win;
 	t_img		s;
@@ -81,6 +87,8 @@ typedef struct	s_env
 	t_pstat		phi_s[7];
 	int			phi_hp[7];	
 	pthread_t	thread[7];
+	int			phi_hp[7];
+	int			play;
 }				t_env;
 typedef CS_ENV	t_cenv;
 
@@ -101,9 +109,11 @@ typedef struct	s_thread
 
 int				phi_init_env(t_env *e);
 int				phi_init_mlx(t_env *e);
+void			phi_pause_mlx(t_env *e);
 int				phi_redraw_surface(t_cenv *e);
-int				phi_mlx_quit(t_graph *g);
+int				phi_quit_mlx(t_graph *g);
 void			phi_redraw_image(t_cenv *e);
+int				phi_loop_hook(void *envp);
 
 /*
 ** *****************************************************************************

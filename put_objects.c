@@ -1,24 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redraw.c                                           :+:      :+:    :+:   */
+/*   put_objects.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/02/19 11:24:58 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/19 14:15:09 by ngoguey          ###   ########.fr       */
+/*   Created: 2015/02/19 14:15:24 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/02/19 14:18:24 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <phi.h>
 
 
-
-
-void		phi_redraw_image(t_cenv *e)
+static void	draw_row()
 {
-	ft_bzero(e->g.i.dat, WIN_X * WIN_Y * 4);
 	
-	(void)e;
-
+	return ;
 }
+
+void		phi_puttable(t_graph *grap)
+{
+	int		i;
+
+	i = TABLE_TOPPAD;
+	while (i < TABLE_TOPPAD + TABLE_RADIUS * 2)
+	{
+		
+		
+	}
+	return ;
+}
+
