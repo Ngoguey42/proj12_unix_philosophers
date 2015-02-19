@@ -6,18 +6,19 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 11:06:03 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/19 11:07:19 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/19 11:42:35 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <phi.h>
 
-void		phi_init_env(t_env *e)
+int			phi_init_env(t_env *e)
 {
 	ft_bzero(&e, sizeof(t_env));
-	
+	if (phi_init_mlx(e))
+		return (0);
 
 
 
-	return ;
+	return (0);
 }
