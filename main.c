@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:12 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/19 12:11:47 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/02/19 14:06:29 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,7 @@ int		main(void)
 
 	if (phi_init_env(&e))
 		return (1);
+	
+	phi_pause_mlx(&e);
 	return (0);
 }

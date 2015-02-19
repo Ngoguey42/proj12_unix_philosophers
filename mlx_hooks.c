@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redraw.c                                           :+:      :+:    :+:   */
+/*   mlx_hooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/02/19 11:24:58 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/19 14:15:09 by ngoguey          ###   ########.fr       */
+/*   Created: 2015/02/19 14:05:05 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/02/19 14:11:14 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <phi.h>
+#include <stdlib.h>
 
-
-
-
-void		phi_redraw_image(t_cenv *e)
+int			phi_expose_hook(void *envp)
 {
-	ft_bzero(e->g.i.dat, WIN_X * WIN_Y * 4);
-	
-	(void)e;
 
+	(void)envp;
+	return (0);
+}
+
+
+int			phi_loop_hook(void *envp)
+{
+	t_env	*e;
+
+	e = (t_env*)envp;
+	if (e->g.redraw)
+		phi_redraw_surface(e);
+	if (!e->play)
+		exit(0);
+		/* phi_leave_correctly(); */
+	return (0);
 }

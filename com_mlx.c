@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/03 07:44:42 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/19 12:29:56 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/02/19 14:13:05 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ int		phi_init_mlx(t_env *e)
 {
 	t_graph		*g;
 
-	g = &e->g;
+	g = &(e->g);
 	if (!(g->serv = mlx_init()))
 		return (ft_dprintf(2, CONNECTION_FAIL), 1);
 	if (!(g->win = mlx_new_window(g->serv, WIN_X, WIN_Y, "Philosophers")))
 		return (ft_dprintf(2, WINDOW_FAIL), 1);
 //	mlx_expose_hook(g->win, &phi_expose_hook, e);
-///	mlx_loop_hook(g->serv, &phi_loop_hook, g);
+	mlx_loop_hook(g->serv, &phi_loop_hook, g);
 	if ((g->s.img = mlx_new_image(g->serv, WIN_X, WIN_Y)) == NULL)
 		return (ft_dprintf(2, IMAGE_FAIL), 1);
 	if ((g->s.dat = mlx_get_data_addr(g->s.img, &g->s.bpp,
@@ -43,9 +43,15 @@ int		phi_redraw_surface(t_cenv *e)
 	return (0);
 }
 
-int		phi_mlx_quit(t_graph *g)
+int		phi_quit_mlx(t_graph *g)
 {
 	mlx_destroy_image(g->serv, g->s.img);
 	mlx_destroy_window(g->serv, g->win);
 	return (0);
+}
+
+void	phi_pause_mlx(t_env *e)
+{
+	mlx_loop(e->g.serv);
+	return ;
 }
