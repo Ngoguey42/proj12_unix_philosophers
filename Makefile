@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/04 11:28:17 by ngoguey           #+#    #+#              #
-#    Updated: 2015/02/19 14:32:26 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/02/19 15:06:54 by ngoguey          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -37,7 +37,7 @@ LFTGRE = gre
 
 # Put new sources here / Mettre les nouvelles sources ici.
 SRCSFILES = main.c init_env.c com_mlx.c redraw.c\
-mlx_hooks.c philo.c
+mlx_hooks.c philo.c putpix_mlx.c put_objects.c
 
 SRC = $(addprefix $(SRCPATH)/,$(SRCSFILES))
 OBJECTS = $(SRC:$(SRCPATH)/%.c=$(OBJPATH)/%.o)

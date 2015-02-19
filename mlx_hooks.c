@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 14:05:05 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/19 15:57:32 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/02/19 15:10:56 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ int				phi_loop_hook(void *envp)
 
 	e = (t_env*)envp;
 	if (e->g.redraw)
+	{
+		e->g.redraw = 0;
 		phi_redraw_surface(e);
+	}
 	if (!e->play)
 		phi_leave_correctly(e);
 	return (0);
