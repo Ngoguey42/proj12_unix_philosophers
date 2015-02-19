@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/19 14:17:36 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/19 14:34:07 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,7 @@ typedef struct	s_env
 	int			mutex[7];
 	t_pstat		phi_s[7];
 	int			phi_hp[7];	
-	pthread_t	thread[7];
-	int			phi_hp[7];
+	pthread_t	tid[7];
 	int			play;
 }				t_env;
 typedef CS_ENV	t_cenv;
@@ -114,6 +113,8 @@ int				phi_redraw_surface(t_cenv *e);
 int				phi_quit_mlx(t_graph *g);
 void			phi_redraw_image(t_cenv *e);
 int				phi_loop_hook(void *envp);
+void        *phi_thread_split(void  *ptr);
+
 
 /*
 ** *****************************************************************************

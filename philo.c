@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redraw.c                                           :+:      :+:    :+:   */
+/*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/02/19 11:24:58 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/19 14:36:04 by ngoguey          ###   ########.fr       */
+/*   Created: 2015/02/19 14:30:02 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/02/19 14:36:45 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <phi.h>
 
-void		phi_redraw_image(t_cenv *e)
-{
-	ft_bzero(e->g.s.dat, WIN_X * WIN_Y * 4);
-	
-	(void)e;
 
+static void	philo(t_env *e, int id)
+{
+	(void)e;
+	(void)id;
+	while (e->play)
+	{
+
+	}
+	return ;
+}
+
+
+void		*phi_thread_split(void	*ptr)
+{
+	philo(((t_thread*)ptr)->e, ((t_thread*)ptr)->id);
+	return (NULL);
 }

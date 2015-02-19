@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:12 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/19 14:25:41 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/02/19 14:37:22 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@
 **	pass env's pointer
 */
 
+static int		check_defines(void)
+{
+
+	return (0);
+}
+
 static void		init_game(t_env *e, t_thread tid[7])
 {
 	int		i;
@@ -37,9 +43,9 @@ static void		init_game(t_env *e, t_thread tid[7])
 	i = 0;
 	while (i < 7)
 	{
-		tid[i]->e = e;
-		tid[i]->id = i;
- 		pthread_create(e->thread[i], NULL, &phi_thread_split, t_thread[i]);
+		tid[i].e = e;
+		tid[i].id = i;
+ 		pthread_create(&e->tid[i], NULL, &phi_thread_split, &tid[i]);
 		i++;
 	}
 }
@@ -51,8 +57,9 @@ int				main(void)
 
 	if (check_defines())
 		return (1);
-	if (phi_init_env(&e, tid))
+	if (phi_init_env(&e))
 		return (1);
-	init_game(&e);
+	init_game(&e, tid);
+	phi_pause_mlx(&e);
 	return (0);
 }
