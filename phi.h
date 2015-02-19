@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/19 15:41:23 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/19 17:44:20 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,17 @@
 
 # include <libft.h>
 # include <ft_math.h>
+# include <pthread.h>
+# include <time.h>
 #include <ft_debug.h> //debug
-#include <pthread.h>
 
 # define MAX_LIFE 100
 # define EAT_T 5
 # define REST_T 3
 # define THINK_T 2
-# define TIMEOUT 30
+# define TIMEOUT 10
 
-typedef pthread_mutex_t t_mutex;
+typedef pthread_mutex_t		t_mutex;
 
 typedef enum	s_pstat
 {
@@ -96,9 +97,10 @@ typedef struct	s_env
 	t_sstat		stick_s[7];
 	t_mutex		mutex[7];
 	t_pstat		phi_s[7];
-	int			phi_hp[7];	
+	int			phi_hp[7];
 	pthread_t	tid[7];
 	int			play;
+	time_t		saved_time;
 }				t_env;
 typedef CS_ENV	t_cenv;
 
@@ -112,23 +114,22 @@ typedef struct	s_thread
 	int			id;
 }				t_thread;
 
-
 /*
 ** *****************************************************************************
 */
 
-int				phi_init_env(t_env *e);
+int				phi_init_env(t_env *e, t_thread tid[7]);
 int				phi_init_mlx(t_env *e);
 void			phi_pause_mlx(t_env *e);
 int				phi_redraw_surface(t_cenv *e);
 int				phi_quit_mlx(t_graph *g);
 void			phi_redraw_image(t_cenv *e);
 int				phi_loop_hook(void *envp);
-void        *phi_thread_split(void  *ptr);
-int phi_puts_pix(const t_graph *e, t_cooi coo, t_co c);
-int phi_put_string(const t_graph *e, t_cooi coo, t_co c, char *str);
-void        phi_puttable(const t_graph *g);
-void        phi_putphilo(const t_graph *g);
+void			*phi_thread_split(void  *ptr);
+int				phi_puts_pix(const t_graph *e, t_cooi coo, t_co c);
+int				phi_put_string(const t_graph *e, t_cooi coo, t_co c, char *str);
+void			phi_puttable(const t_graph *g);
+void			phi_putphilo(const t_graph *g);
 
 /*
 ** *****************************************************************************

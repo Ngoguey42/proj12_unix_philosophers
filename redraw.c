@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 11:24:58 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/19 15:31:46 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/19 16:36:28 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,4 @@ void		phi_redraw_image(t_cenv *e)
 	phi_puttable(&e->g);
 	phi_putphilo(&e->g);
 	(void)e;
-
 }
