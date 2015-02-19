@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/04 11:28:17 by ngoguey           #+#    #+#              #
-#    Updated: 2015/02/19 11:07:04 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/02/19 12:31:39 by wide-aze         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -23,10 +23,10 @@ INCLUDE = -I ./
 
 CC = gcc
 
-LIBS = $(LFT)
+LIBS = $(LFT) -L/usr/X11/lib
 INCLUDES = $(INCLUDE) $(LFTIPATH)
 
-BASEFLAGS = -Wall -Wextra
+BASEFLAGS = -Wall -Wextra -lmlx -lXext -lX11
 CFLAGS = $(BASEFLAGS) -Werror -O2
 DEBUGFLAGS = $(BASEFLAGS) -g
 
@@ -36,7 +36,7 @@ LFTG = g
 LFTGRE = gre
 
 # Put new sources here / Mettre les nouvelles sources ici.
-SRCSFILES = main.c init_env.c
+SRCSFILES = main.c init_env.c com_mlx.c redraw.c
 
 SRC = $(addprefix $(SRCPATH)/,$(SRCSFILES))
 OBJECTS = $(SRC:$(SRCPATH)/%.c=$(OBJPATH)/%.o)

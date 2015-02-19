@@ -6,15 +6,13 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 11:24:58 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/19 11:25:25 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/19 12:30:15 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <phi.h>
 
-void		phi_redraw(t_cenv *e)
+void		phi_redraw_image(t_cenv *e)
 {
-	
-	
-	return ;
+	(void)e;
 }

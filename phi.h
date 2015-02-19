@@ -1,4 +1,4 @@
-s/* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   phi.h                                              :+:      :+:    :+:   */
@@ -6,7 +6,7 @@ s/* ************************************************************************** *
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/19 11:41:10 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/19 12:29:11 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@ s/* ************************************************************************** *
 # define PHI_H
 
 # include <libft.h>
+# include <ft_math.h>
 #include <ft_debug.h> //debug
 
 
@@ -21,7 +22,7 @@ typedef enum	s_state
 {
 	rest = 0,
 	think = 1,
-	eat = 2;
+	eat = 2,
 }				t_state;
 
 
@@ -33,19 +34,17 @@ typedef enum	s_state
 **		's'			screen image datas.
 */
 
-#define WINX	1600
-#define RATIO	(4. / 3.)
+# define WINX	1600
+# define RATIO	(4. / 3.)
+# define WIN_X	(int)(WINX)
+# define WIN_Y	(int)((double)WIN_X / RATIO)
 
-#define WIN_X	(int)(WIN_X)
-#define WIN_Y	(int)((double)WIN_X / ratio)
-
-typedef struct	s_grap
+typedef struct	s_graph
 {	
 	void		*serv;
 	void		*win;
 	t_img		s;
-}				t_grap;
-
+}				t_graph;
 
 /*
 ** *****************************************************************************
@@ -75,7 +74,11 @@ typedef CS_ENV	t_cenv;
 ** *****************************************************************************
 */
 
-void			phi_init_env(t_env *e);
+int				phi_init_env(t_env *e);
+int				phi_init_mlx(t_env *e);
+int				phi_redraw_surface(t_cenv *e);
+int				phi_mlx_quit(t_graph *g);
+void			phi_redraw_image(t_cenv *e);
 
 /*
 ** *****************************************************************************
