@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/19 14:34:07 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/19 15:41:23 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,24 @@ typedef enum	s_sstat
 **		's'			screen image datas.
 */
 
-# define WINX	1000
+# define WINX	1200
 # define RATIO	(4. / 3.)
 # define WIN_X	(int)(WINX)
 # define WIN_Y	(int)((double)WIN_X / RATIO)
 
-# define TABLE_LEFTPAD 300
-# define TABLE_TOPPAD 300
-# define TABLE_RADIUS 300
+# define TABLE_LEFTPAD 400
+# define TABLE_TOPPAD 250
+# define TABLE_RADIUS 200
 
+# define PHILO_RADIUS 30
+
+# define P0_POS (t_cooi){600 - PHILO_RADIUS, 240 - PHILO_RADIUS * 2, 0}
+# define P1_POS (t_cooi){810, 260, 0}
+# define P2_POS (t_cooi){810, 455, 0}
+# define P3_POS (t_cooi){740 - PHILO_RADIUS, 660, 0}
+# define P4_POS (t_cooi){460 - PHILO_RADIUS, 660, 0}
+# define P5_POS (t_cooi){390 - PHILO_RADIUS * 2 , 455, 0}
+# define P6_POS (t_cooi){390 - PHILO_RADIUS * 2, 260, 0}
 
 typedef struct	s_graph
 {
@@ -114,7 +123,10 @@ int				phi_quit_mlx(t_graph *g);
 void			phi_redraw_image(t_cenv *e);
 int				phi_loop_hook(void *envp);
 void        *phi_thread_split(void  *ptr);
-
+int phi_puts_pix(const t_graph *e, t_cooi coo, t_co c);
+int phi_put_string(const t_graph *e, t_cooi coo, t_co c, char *str);
+void        phi_puttable(const t_graph *g);
+void        phi_putphilo(const t_graph *g);
 
 /*
 ** *****************************************************************************

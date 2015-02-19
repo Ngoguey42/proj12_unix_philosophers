@@ -6,12 +6,11 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 14:30:02 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/19 14:36:45 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/19 14:37:57 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <phi.h>
-
 
 static void	philo(t_env *e, int id)
 {
@@ -19,7 +18,7 @@ static void	philo(t_env *e, int id)
 	(void)id;
 	while (e->play)
 	{
-
+		
 	}
 	return ;
 }
