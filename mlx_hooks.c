@@ -6,22 +6,34 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 14:05:05 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/19 14:11:14 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/19 15:57:32 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <phi.h>
 #include <stdlib.h>
 
-int			phi_expose_hook(void *envp)
+static void		phi_leave_correctly(t_env *e)
 {
+    int		i;
 
-	(void)envp;
+	phi_quit_mlx(&e->g);
+	i = 0;
+    while (i < 7)
+		pthread_join(e->tid[i++], NULL);
+	i = 0;
+	while (i < 7)
+		pthread_mutex_destroy(&e->mutex[i++]);
+	exit(0);
+}
+
+int				phi_expose_hook(void *envp)
+{
+	phi_redraw_surface((t_env*)envp);
 	return (0);
 }
 
-
-int			phi_loop_hook(void *envp)
+int				phi_loop_hook(void *envp)
 {
 	t_env	*e;
 
@@ -29,7 +41,6 @@ int			phi_loop_hook(void *envp)
 	if (e->g.redraw)
 		phi_redraw_surface(e);
 	if (!e->play)
-		exit(0);
-		/* phi_leave_correctly(); */
+		phi_leave_correctly(e);
 	return (0);
 }

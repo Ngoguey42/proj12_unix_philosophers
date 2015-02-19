@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 14:30:02 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/19 14:36:45 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/19 15:58:14 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	philo(t_env *e, int id)
 {
 	(void)e;
 	(void)id;
+	qprintf("%d \n", id);
 	while (e->play)
 	{
 

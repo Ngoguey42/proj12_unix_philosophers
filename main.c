@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:12 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/19 14:37:22 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/19 15:41:32 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 ** pthread_mutex_trylock
 ** pthread_mutex_lock
 ** pthread_mutex_unlock
+** (usleep/time/read/exit)
 */
 
 /*
@@ -32,7 +33,8 @@
 
 static int		check_defines(void)
 {
-
+	if (MAX_LIFE < 0 || EAT_T < 0 || REST_T < 0 || THINK_T < 0 || TIMEOUT < 0)
+		return (-1);
 	return (0);
 }
 

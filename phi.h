@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/19 14:34:07 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/19 15:54:22 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # define REST_T 3
 # define THINK_T 2
 # define TIMEOUT 30
+
+typedef pthread_mutex_t t_mutex;
 
 typedef enum	s_pstat
 {
@@ -83,7 +85,7 @@ typedef struct	s_env
 {
 	t_graph		g;
 	t_sstat		stick_s[7];
-	int			mutex[7];
+	t_mutex		mutex[7];
 	t_pstat		phi_s[7];
 	int			phi_hp[7];	
 	pthread_t	tid[7];
