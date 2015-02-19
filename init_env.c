@@ -1,41 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/02/19 10:12:12 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/19 11:05:49 by ngoguey          ###   ########.fr       */
+/*   Created: 2015/02/19 11:06:03 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/02/19 11:07:19 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <phi.h>
 
-/*
-** Authorized functions:
-** free, malloc, write  (NO exit)
-** pthread_create
-** pthread_detach
-** pthread_join
-** pthread_mutex_init
-** pthread_mutex_destroy
-** pthread_mutex_trylock
-** pthread_mutex_lock
-** pthread_mutex_unlock
-*/
-
-
-/*
-** 'main'
-**	pass env's pointer
-*/
-
-int		main(void)
+void		phi_init_env(t_env *e)
 {
-	t_env	e;
+	ft_bzero(&e, sizeof(t_env));
+	
 
-	phi_init_env(&e);
 
-	return (0);
+
+	return ;
 }
