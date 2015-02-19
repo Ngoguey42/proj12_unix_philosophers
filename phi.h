@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/19 12:48:00 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/19 14:06:21 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <libft.h>
 # include <ft_math.h>
 #include <ft_debug.h> //debug
+#include <pthread.h>
 
 # define MAX_LIFE 100
 # define EAT_T 5
@@ -79,13 +80,19 @@ typedef struct	s_env
 	int			mutex[7];
 	t_pstat		phi_s[7];
 	int			phi_hp[7];	
-
+	pthread_t	thread[7];
 }				t_env;
 typedef CS_ENV	t_cenv;
 
 /*
 ** *****************************************************************************
 */
+
+typedef struct	s_thread
+{
+	t_env		*e;
+	int			id;
+}				t_thread;
 
 
 /*
