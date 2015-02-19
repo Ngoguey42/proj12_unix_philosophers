@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/19 10:13:17 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/19 10:28:47 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,13 @@
 # define PHI_H
 
 # include <libft.h>
+
+typedef struct	s_env
+{
+
+
+
+}				t_env;
+
 
 #endif
