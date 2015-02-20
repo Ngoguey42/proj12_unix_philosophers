@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/20 11:17:46 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/20 12:04:13 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ alias gits="git status"
 # define EAT_T 5
 # define REST_T 3
 # define THINK_T 2
-# define TIMEOUT 10
+# define TIMEOUT 100
 
 typedef pthread_mutex_t		t_mutex;
 
@@ -122,7 +122,6 @@ typedef struct	s_thread
 {
 	t_env		*e;
 	int			id;
-	time_t		end_time;
 }				t_thread;
 
 /*
@@ -142,6 +141,8 @@ int				phi_put_string(const t_graph *e, t_cooi coo, t_co c, char *str);
 void			phi_puttable(const t_graph *g);
 void			phi_putphilo(const t_graph *g);
 void			phi_leave_correctly(t_env *e, int nthread, int nmutexes);
+void        phi_put_strings(t_cenv *e);
+
 /*
 ** *****************************************************************************
 */

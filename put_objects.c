@@ -6,12 +6,11 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 14:15:24 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/19 15:37:30 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/20 11:58:49 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <phi.h>
-
 
 static void	draw_row(const t_graph *g, int row, int pad, int rad)
 {
@@ -57,7 +56,6 @@ void		phi_putphilo(const t_graph *g)
 		while (j < PHILO_RADIUS * 2)
 			draw_row(g, pos[i].y + j++, pos[i].x, PHILO_RADIUS);
 		i++;
-		/* break ; */
 	}
 	
 	return ;
