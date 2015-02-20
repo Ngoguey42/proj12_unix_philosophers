@@ -6,12 +6,11 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 14:05:05 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/19 17:43:49 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/02/20 11:16:14 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <phi.h>
-#include <stdlib.h>
 #include <time.h>
 
 int				phi_expose_hook(void *envp)
@@ -32,7 +31,7 @@ int				phi_loop_hook(void *envp)
 		phi_redraw_surface(e);
 	}
 	if (!e->play)
-		phi_leave_correctly(e);
+		phi_leave_correctly(e, 7, 7);
 	time(&tmp);
 	if (tmp - e->saved_time >= TIMEOUT)
 	{

@@ -6,12 +6,21 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/19 18:33:41 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/02/20 11:17:46 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHI_H
 # define PHI_H
+
+/*
+alias gitals="git add \`git ls-files\` ; git status"
+alias gitac="git add \`ls -1 *.c\` ; git status"
+alias gitpom="git pull origin master"
+alias gits="git status"
+
+
+ */
 
 # include <libft.h>
 # include <ft_math.h>
@@ -27,7 +36,7 @@
 
 typedef pthread_mutex_t		t_mutex;
 
-typedef enum	s_pstat
+typedef enum	e_pstat
 {
 	rest = 0,
 	think = 1,
@@ -36,11 +45,11 @@ typedef enum	s_pstat
 	waitthink = 4,
 }				t_pstat;
 
-typedef enum	s_sstat
+typedef enum	e_sstat
 {
 	available = 0,
-	left = 2,
-	right = 3,
+	left = 1,
+	right = 2,
 }				t_sstat;
 
 /*
@@ -101,6 +110,7 @@ typedef struct	s_env
 	pthread_t	tid[7];
 	int			play;
 	time_t		saved_time;
+	time_t		act_time[7];
 }				t_env;
 typedef CS_ENV	t_cenv;
 
@@ -126,7 +136,7 @@ int				phi_redraw_surface(t_cenv *e);
 int				phi_quit_mlx(t_graph *g);
 void			phi_redraw_image(t_cenv *e);
 int				phi_loop_hook(void *envp);
-void			*phi_thread_split(void  *ptr);
+void			*phi_thread_split(void *ptr);
 int				phi_puts_pix(const t_graph *e, t_cooi coo, t_co c);
 int				phi_put_string(const t_graph *e, t_cooi coo, t_co c, char *str);
 void			phi_puttable(const t_graph *g);

@@ -6,12 +6,13 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 11:06:03 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/19 17:43:51 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/02/20 11:05:29 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <phi.h>
 #include <time.h>
+#include <stdlib.h>
 
  void			phi_leave_correctly(t_env *e, int nthread, int nmutexes)
 {
@@ -31,7 +32,7 @@ static void		init_game(t_env *e, t_thread tid[7])
 	
 	i = 0;
 	while (i < 7)
-		if (err = pthread_mutex_init(&e->mutex[i++], NULL))
+		if ((err = pthread_mutex_init(&e->mutex[i++], NULL)))
 		{
 			//print error
 			phi_leave_correctly(e, 0, i);
@@ -41,7 +42,7 @@ static void		init_game(t_env *e, t_thread tid[7])
 	{
 		tid[i].e = e;
 		tid[i].id = i;
-		if (err = pthread_create(&e->tid[i], NULL, &phi_thread_split, &tid[i]))
+		if ((err = pthread_create(&e->tid[i], NULL, &phi_thread_split, &tid[i])))
 		{
 			//print err
 			phi_leave_correctly(e, i, 7);

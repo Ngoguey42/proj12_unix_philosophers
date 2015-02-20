@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/03 07:44:42 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/19 14:13:05 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/20 11:16:48 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int		phi_redraw_surface(t_cenv *e)
 {
 	phi_redraw_image(e);
 	mlx_put_image_to_window(e->g.serv, e->g.win, e->g.s.img, 0, 0);
+	/* phi_put_strings(e); */
 	return (0);
 }
 
