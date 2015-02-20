@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/20 12:39:27 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/20 14:32:40 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,15 @@ typedef struct	s_graph
 /*
 ** *****************************************************************************
 ** 'struct s_env' (1 instance, inside 'main' function)
-**		'serv'		...
-**		'var1'		...
-**		'var1'		...
+**		'g'				mlx vars + bool redraw
+**		'stick_s'		stick state (0 free/1 left/2 right)
+**		'mutex'			mutex lock for each thread
+**		'phi_s'			phi state
+**		'phi_hp'		phi hp
+**		'tid'			threads id
+**		'play'			boolean
+**		'saved_time'	time saved at init
+**		'act_time'		last action time
 ** *
 ** 't_cenv'	== const struct s_env
 **		(use const t_env as soon as possible)
@@ -103,6 +109,7 @@ typedef struct	s_env
 	time_t		saved_time;
 	time_t		act_time[7];
 }				t_env;
+
 typedef CS_ENV	t_cenv;
 
 /*
@@ -140,7 +147,7 @@ int				phi_put_string(const t_graph *e, t_cooi coo, t_co c, char *str);
 void			phi_puttable(const t_graph *g);
 void			phi_putphilo(const t_graph *g);
 void			phi_leave_correctly(t_env *e, int nthrd, int nmutx, char *msg);
-void        phi_put_strings(t_cenv *e);
+void			phi_put_strings(t_cenv *e);
 
 /*
 ** *****************************************************************************
