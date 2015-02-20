@@ -6,15 +6,13 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 11:06:03 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/20 17:00:42 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/20 17:45:13 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <phi.h>
 #include <time.h>
 #include <stdlib.h>
-#define ERR_INIT_MUTEXES "Could not init mutexes.\n"
-#define ERR_CREATE_THREADS "Could not create threads.\n"
 
 void			phi_leave_correctly(t_env *e, int nthrd, int nmutx, char *msg)
 {

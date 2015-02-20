@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/20 16:59:37 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/20 17:45:08 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@
 
 # define LEAVE_MSG "Now, it is time... To DAAAAAAAANCE ! ! !\n"
 # define TIMEFAIL_MSG "Could not retrieve time\n"
+# define CONNECTION_FAIL "Could not establish connection to X-Window server.\n"
+# define WINDOW_FAIL "Could not create new window.\n"
+# define IMAGE_FAIL "Could not create new image.\n"
+# define IMAGE_DATA_FAIL "Could not retrieve image's data.\n"
+# define ERR_INIT_MUTEXES "Could not init mutexes.\n"
+# define ERR_CREATE_THREADS "Could not create threads.\n"
 
 /*
 ** RSID, Right hand Stick ID.

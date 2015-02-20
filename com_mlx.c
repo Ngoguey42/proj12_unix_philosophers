@@ -6,16 +6,12 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/03 07:44:42 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/20 16:57:48 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/20 17:40:48 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <phi.h>
 #include <mlx.h>
-#define CONNECTION_FAIL	"Could not establish connection to X-Window server.\n"
-#define WINDOW_FAIL		"Could not create new window.\n"
-#define IMAGE_FAIL		"Could not create new image.\n"
-#define IMAGE_DATA_FAIL	"Could not retrieve image's data.\n"
 
 int		phi_init_mlx(t_env *e)
 {
