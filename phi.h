@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/20 11:29:51 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/02/20 12:00:36 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ int				phi_puts_pix(const t_graph *e, t_cooi coo, t_co c);
 int				phi_put_string(const t_graph *e, t_cooi coo, t_co c, char *str);
 void			phi_puttable(const t_graph *g);
 void			phi_putphilo(const t_graph *g);
-void			phi_leave_correctly(t_env *e, int nthread, int nmutexes);
+void			phi_leave_correctly(t_env *e, int nthrd, int nmutx, char *msg);
 /*
 ** *****************************************************************************
 */
