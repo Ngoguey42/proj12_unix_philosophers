@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/20 12:20:43 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/20 12:39:27 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,14 @@ typedef struct	s_thread
 	t_env		*e;
 	int			id;
 }				t_thread;
+
+typedef struct	s_stick
+{
+	t_cooi		coo;
+	int			stick_id;
+	t_sstat		stick_status;
+}				t_stick;
+
 
 /*
 ** *****************************************************************************

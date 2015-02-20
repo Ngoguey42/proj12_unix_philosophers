@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 14:15:24 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/20 11:58:49 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/20 12:37:17 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,9 @@ void		phi_putphilo(const t_graph *g)
 	const t_cooi	pos[7] = {
 
 	P0_POS, P1_POS, P2_POS, P3_POS, P4_POS, P5_POS, P6_POS};
-	
 	i = 0;
 	while (i < 7)
 	{
-		qprintf("%d %d\n",
-				pos[i].x, pos[i].y
-
-			);
 		j = 0;
 		while (j < PHILO_RADIUS * 2)
 			draw_row(g, pos[i].y + j++, pos[i].x, PHILO_RADIUS);
