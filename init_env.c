@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 11:06:03 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/20 11:05:29 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/20 11:42:14 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void		init_game(t_env *e, t_thread tid[7])
 	while (i < 7)
 		if ((err = pthread_mutex_init(&e->mutex[i++], NULL)))
 		{
-			//print error
+			ft_dprintf(2, "Could not init mutexes.\n");
 			phi_leave_correctly(e, 0, i);
 		}
 	i = 0;
@@ -44,7 +44,7 @@ static void		init_game(t_env *e, t_thread tid[7])
 		tid[i].id = i;
 		if ((err = pthread_create(&e->tid[i], NULL, &phi_thread_split, &tid[i])))
 		{
-			//print err
+			ft_dprintf(2, "Could not create threads.\n");
 			phi_leave_correctly(e, i, 7);
 		}
 		i++;

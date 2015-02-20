@@ -6,21 +6,12 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/20 11:17:46 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/20 11:29:51 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHI_H
 # define PHI_H
-
-/*
-alias gitals="git add \`git ls-files\` ; git status"
-alias gitac="git add \`ls -1 *.c\` ; git status"
-alias gitpom="git pull origin master"
-alias gits="git status"
-
-
- */
 
 # include <libft.h>
 # include <ft_math.h>
