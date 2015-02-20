@@ -14,20 +14,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-static void		phi_leave_correctly(t_env *e)
-{
-	int		i;
-
-	phi_quit_mlx(&e->g);
-	i = 0;
-	while (i < 7)
-		pthread_join(e->tid[i++], NULL);
-	i = 0;
-	while (i < 7)
-		pthread_mutex_destroy(&e->mutex[i++]);
-	exit(0);
-}
-
 int				phi_expose_hook(void *envp)
 {
 	phi_redraw_surface((t_env*)envp);
@@ -51,7 +37,7 @@ int				phi_loop_hook(void *envp)
 	if (tmp - e->saved_time >= TIMEOUT)
 	{
 		ft_printf("Now, it is time... To DAAAAAAAANCE ! ! !\n");
-		phi_leave_correctly(e);
+		phi_leave_correctly(e, 7, 7);
 	}
 	return (0);
 }

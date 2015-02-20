@@ -131,7 +131,7 @@ int				phi_puts_pix(const t_graph *e, t_cooi coo, t_co c);
 int				phi_put_string(const t_graph *e, t_cooi coo, t_co c, char *str);
 void			phi_puttable(const t_graph *g);
 void			phi_putphilo(const t_graph *g);
-
+void			phi_leave_correctly(t_env *e, int nthread, int nmutexes);
 /*
 ** *****************************************************************************
 */
