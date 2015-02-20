@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:12 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/19 16:33:42 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/02/20 14:53:11 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,10 @@ int				main(void)
 	t_env		e;
 	t_thread	tid[7];
 
+	/* int i; */
+	/* for (i = -10; i < 10 ; i++) */
+		/* qprintf("%3d R%3d  L%3d\n", i, RIGHT_STICK(i), LEFT_STICK(i)); */
+	
 	if (check_defines())
 		return (1);
 	if (phi_init_env(&e, tid))

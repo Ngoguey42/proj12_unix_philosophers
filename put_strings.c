@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/20 11:27:27 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/20 12:10:50 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/20 16:58:10 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,5 @@ void		phi_put_strings(t_cenv *e)
 	put_one_id(&e->g, 4, ID_MID(P4_POS));
 	put_one_id(&e->g, 5, ID_MID(P5_POS));
 	put_one_id(&e->g, 6, ID_MID(P6_POS));
-
 	return ;
 }

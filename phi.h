@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/20 14:32:40 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/02/20 16:59:37 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,39 @@
 # define EAT_T 5
 # define REST_T 3
 # define THINK_T 2
-# define TIMEOUT 100
+# define TIMEOUT 5
+
+# define STEP 1
+# define USTEP (STEP * 100000)
+
+# define LEAVE_MSG "Now, it is time... To DAAAAAAAANCE ! ! !\n"
+# define TIMEFAIL_MSG "Could not retrieve time\n"
+
+/*
+** RSID, Right hand Stick ID.
+** LSID, Left hand Stick ID.
+*/
+# define RSID(pid) (pid == 0 ? 6 : pid - 1)
+# define LSID(pid) (pid)
+
 
 typedef pthread_mutex_t		t_mutex;
 
 typedef enum	e_pstat
 {
-	rest = 0,
-	think = 1,
-	eat = 2,
-	waiteat = 3,
-	waitthink = 4,
+	start = 0,
+	rest = 1,
+	think = 2,
+	eat = 3,
+	await = 4,
 }				t_pstat;
 
-typedef enum	e_sstat
+typedef enum	e_owntype
 {
 	available = 0,
-	left = 1,
-	right = 2,
-}				t_sstat;
+	soft_lock = 1,
+	hard_lock = 2,
+}				t_owntype;
 
 /*
 ** *****************************************************************************
@@ -89,7 +103,7 @@ typedef struct	s_graph
 **		'tid'			threads id
 **		'play'			boolean
 **		'saved_time'	time saved at init
-**		'act_time'		last action time
+**		'act_time'		last action time left
 ** *
 ** 't_cenv'	== const struct s_env
 **		(use const t_env as soon as possible)
@@ -100,14 +114,34 @@ typedef struct	s_graph
 typedef struct	s_env
 {
 	t_graph		g;
-	t_sstat		stick_s[7];
-	t_mutex		mutex[7];
-	t_pstat		phi_s[7];
-	int			phi_hp[7];
-	pthread_t	tid[7];
 	int			play;
-	time_t		saved_time;
-	time_t		act_time[7];
+	time_t		init_time;
+	time_t		last_time;
+	time_t		end_time;
+	
+//sticks
+	t_mutex		mutex[7];
+	t_owntype	own_type[7];
+	int			owner[7];
+
+	
+	//philos
+	int			phi_hp[7];
+	int			eating_delta[7];
+	pthread_t	tid[7];
+	
+	time_t		act_end_time[7];
+
+
+
+	/* time_t		act_time[7]; */
+	
+	t_pstat		official_s[7];
+	t_pstat		wished_s[7];
+	
+	/* t_	left_relationship[7]; //mon status vis a vis de la G */
+	/* t_	right_relationship[7];//mon status vis a vis de la D */
+	
 }				t_env;
 
 typedef CS_ENV	t_cenv;
@@ -122,12 +156,12 @@ typedef struct	s_thread
 	int			id;
 }				t_thread;
 
-typedef struct	s_stick
-{
-	t_cooi		coo;
-	int			stick_id;
-	t_sstat		stick_status;
-}				t_stick;
+/* typedef struct	s_stick */
+/* { */
+/* 	t_cooi		coo; */
+/* 	int			stick_id; */
+/* 	t_sstat		stick_status; */
+/* }				t_stick; */
 
 
 /*

@@ -6,19 +6,55 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 14:30:02 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/19 16:36:09 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/02/20 16:54:08 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <phi.h>
+#include <unistd.h>
 
-static void		philo(t_env *e, int id)
+void			phi_pick_action(t_env *e, int id)
 {
 	(void)e;
 	(void)id;
-	qprintf("%d \n", id);
+
+
+	/* setstatus(t_env *e, int id, t_pstat prevstatus, t_pstat newstatus); */
+	/* { */
+	/* 	phi_eat_start_event()   =>lock mutex x2   =>update events  =>update stick status*/
+	/* 	phi_wait_start_event()  */
+	/* 	phi_rest_start_event()  */
+	/* 	phi_think_start_event() =>lock mutex x1*/
+
+
+	/* 	phi_eat_end_event() */
+	/* 	phi_rest_end_event() */
+	/* 	phi_think_end_event() */
+	/* 	phi_wait_end_event() */
+	/* } */
+
+	return ;
+}
+
+/*
+	lock left stick()
+	lock right stick()
+
+
+	num sticks available (0/1/2)
+	time left on stick left
+	time left on stick right
+	is left available
+	is right available
+
+ */
+
+static void		philo(t_env *e, int id)
+{
 	while (e->play)
 	{
+		if (time(NULL) >= e->act_end_time[id])
+			phi_pick_action(e, id);
 	}
 	return ;
 }
