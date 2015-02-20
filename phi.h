@@ -6,21 +6,12 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/20 12:04:13 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/20 12:20:43 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHI_H
 # define PHI_H
-
-/*
-alias gitals="git add \`git ls-files\` ; git status"
-alias gitac="git add \`ls -1 *.c\` ; git status"
-alias gitpom="git pull origin master"
-alias gits="git status"
-
-
- */
 
 # include <libft.h>
 # include <ft_math.h>
@@ -140,7 +131,7 @@ int				phi_puts_pix(const t_graph *e, t_cooi coo, t_co c);
 int				phi_put_string(const t_graph *e, t_cooi coo, t_co c, char *str);
 void			phi_puttable(const t_graph *g);
 void			phi_putphilo(const t_graph *g);
-void			phi_leave_correctly(t_env *e, int nthread, int nmutexes);
+void			phi_leave_correctly(t_env *e, int nthrd, int nmutx, char *msg);
 void        phi_put_strings(t_cenv *e);
 
 /*
