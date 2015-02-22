@@ -25,8 +25,8 @@
 # define THINK_T 2
 # define TIMEOUT 5
 
-# define STEP 1
-# define USTEP (STEP * 100000)
+# define STEP 1 //don't use for now
+# define USTEP (STEP * 100000) //don't use for now
 
 # define LEAVE_MSG "Now, it is time... To DAAAAAAAANCE ! ! !\n"
 # define TIMEFAIL_MSG "Could not retrieve time\n"
@@ -38,32 +38,8 @@
 # define ERR_CREATE_THREADS "Could not create threads.\n"
 
 /*
-** RSID, Right hand Stick ID.
-** LSID, Left hand Stick ID.
-*/
-# define RSID(pid) (pid == 0 ? 6 : pid - 1)
-# define LSID(pid) (pid)
-
-
-typedef pthread_mutex_t		t_mutex;
-
-typedef enum	e_pstat
-{
-	start = 0,
-	rest = 1,
-	think = 2,
-	eat = 3,
-	await = 4,
-}				t_pstat;
-
-typedef enum	e_owntype
-{
-	available = 0,
-	soft_lock = 1,
-	hard_lock = 2,
-}				t_owntype;
-
-/*
+** *****************************************************************************
+** *********************************GRAPH PART**********************************
 ** *****************************************************************************
 ** 'struct s_grap' Graphical datas. (1 instance, inside main's t_env)
 ** 		'redraw'	bool, screen (t_img) + text overlay redraw
@@ -79,6 +55,24 @@ typedef struct	s_graph
 	void		*win;
 	t_img		s;
 }				t_graph;
+
+/*
+** 'enum e_sdir' Sticks on screen direction.
+** 'struct s_stick' Sticks Graph datas (21 instances, 7 Sticks * 3 Positions)
+** 		Contant datas.
+*/
+typedef enum	e_sdir
+{
+	horiz,
+	vert,
+}				t_sdir;
+typedef struct	s_stick
+{
+	t_cooi		coo;
+	int			stick_id;
+	int			owner;
+	t_sdir		direction;
+}				t_stick;
 
 # define WINX	1200
 # define RATIO	(4. / 3.)
@@ -126,6 +120,28 @@ typedef struct	s_graph
 
 /*
 ** *****************************************************************************
+** **********************************GAME PART**********************************
+** *****************************************************************************
+** 'enum e_pstat' Philosopher official status.
+*/
+typedef enum	e_pstat
+{
+	start = 0,
+	rest = 1,
+	think = 2,
+	eat = 3,
+	await = 4,
+}				t_pstat;
+/*
+** 'enum e_owntype'	Type of ownership for a Stick
+*/
+typedef enum	e_owntype
+{
+	available = 0,
+	soft_lock = 1,
+	hard_lock = 2,
+}				t_owntype;
+/*
 ** 'struct s_env' (1 instance, inside 'main' function)
 **		'g'				mlx vars + bool redraw
 **		'stick_s'		stick state (0 free/1 left/2 right)
@@ -140,37 +156,53 @@ typedef struct	s_graph
 ** 't_cenv'	== const struct s_env
 **		(use const t_env as soon as possible)
 */
-
+typedef pthread_mutex_t		t_mutex;
 # define CS_ENV const struct s_env
 
 typedef struct	s_env
 {
 	t_graph		g;
-	int			play;
+	int			play;		//set par emulateur, update apres HPupdate
 	time_t		init_time;
-	time_t		last_time;
+	time_t		last_time; //game time, used to update HP
 	time_t		end_time;
-	
-//sticks
+//** **************************************************************************
+//** **************************************************************************
+//** **************************************************************************
 	t_mutex		mutex[7];
 	t_owntype	own_type[7];
+	/*
+		own_type:
+			By Main:	Game_start			=> available
+			By philo: 	After mutex_lock	=> hard_lock
+			By philo: 	After mutex_unlock	=> available
+	*/
 	int			owner[7]; //initialiser à -1, reset à -1 quand dispo
-
-	
-	//philos
-	int			phi_hp[7];
-	int			eating_delta[7];
+	/*
+		own_type:
+			By Main:	Game_start			=> -1
+			By philo:	After mutex_lock	=> Philo id
+			By philo:	After mutex_unlock	=> -1
+	*/
+//** **************************************************************************
+//** **************************************************************************
+//** **************************************************************************
 	pthread_t	tid[7];
-	
-	time_t		act_end_time[7];
-
+	int			phi_hp[7];//set par l'emulateur
+	t_pstat		official_s[7];//set par le philo
+	/*
+		official_s:
+			Game_start		=> start
+			on_rest_start	=> rest
+			on_wait_start	=> wait
+			on_wait_end		=> eat
+	*/
+	time_t		act_end_time[7];//set par philo, on_action_start
+	int			eating_delta[7];//set par le philo, on_eat_start
 
 
 	/* time_t		act_time[7]; */
-	
-	t_pstat		official_s[7];
 	t_pstat		wished_s[7];
-	
 	/* t_	left_relationship[7]; //mon status vis a vis de la G */
 	/* t_	right_relationship[7];//mon status vis a vis de la D */
 	
@@ -179,9 +211,31 @@ typedef struct	s_env
 typedef CS_ENV	t_cenv;
 
 /*
+** P_RSID, Right hand Stick ID. (from philo)
+** P_LSID, Left hand Stick ID. (from philo)
+** *
+** S_RPID, Right hand Philo ID. (from stick)
+** S_LPID, Left hand Philo ID. (from stick)
+** *
+** P_RPID, Right hand Philo ID. (from philo)
+** P_LPID, Left hand Philo ID. (from philo)
+*/
+# define P_RSID(pid) (pid == 0 ? 6 : pid - 1)
+# define P_LSID(pid) (pid)
+# define S_RPID(sid) (sid)
+# define S_LPID(sid) (sid == 6 ? 0 : sid + 1)
+# define P_RPID(pid) (pid == 0 ? 6 : pid - 1)
+# define P_LPID(pid) (pid == 6 ? 0 pid + 1)
+/*
+** ISLPICK, Is left philosopher picking.
+** ISRPICK, Is right philosopher picking.
+*/
+# ISLPICKNG(pid) (e->act_end_time[P_LPID(pid)] <= curtime)
+# ISRPICKNG(pid) (e->act_end_time[P_RPID(pid)] <= curtime)
+
+/*
 ** *****************************************************************************
 */
-
 typedef struct	s_thread
 {
 	t_env		*e;
@@ -194,21 +248,6 @@ typedef struct	s_thread
 	// available,
 	// left,
 // }				t_spos;
-
-typedef enum	e_sdir
-{
-	horiz,
-	vert,
-}				t_sdir;
-
-typedef struct	s_stick
-{
-	t_cooi		coo;
-	int			stick_id;
-	int			owner;
-	t_sdir		direction;
-}				t_stick;
-
 
 /*
 ** *****************************************************************************
