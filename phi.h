@@ -66,10 +66,19 @@ typedef enum	e_owntype
 /*
 ** *****************************************************************************
 ** 'struct s_grap' Graphical datas. (1 instance, inside main's t_env)
+** 		'redraw'	bool, screen (t_img) + text overlay redraw
 **		'serv'		mlx's serv pointer
 **		'win'		mlx's window pointer
 **		's'			screen image datas.
 */
+
+typedef struct	s_graph
+{
+	int			redraw;
+	void		*serv;
+	void		*win;
+	t_img		s;
+}				t_graph;
 
 # define WINX	1200
 # define RATIO	(4. / 3.)
@@ -107,21 +116,13 @@ typedef enum	e_owntype
 #  define P_ACOOADD(A, X, Y) ACOOTOI((A).x + (X), (A).y + (Y), 0)
 # endif
 
-# define P0_POS (t_cooi){600 - PHILO_RADIUS, 240 - PHILO_RADIUS * 2, 0}
-# define P1_POS (t_cooi){810, 260, 0}
-# define P2_POS (t_cooi){810, 455, 0}
-# define P3_POS (t_cooi){740 - PHILO_RADIUS, 660, 0}
-# define P4_POS (t_cooi){460 - PHILO_RADIUS, 660, 0}
-# define P5_POS (t_cooi){390 - PHILO_RADIUS * 2 , 455, 0}
-# define P6_POS (t_cooi){390 - PHILO_RADIUS * 2, 260, 0}
-
-typedef struct	s_graph
-{
-	int			redraw;
-	void		*serv;
-	void		*win;
-	t_img		s;
-}				t_graph;
+# define P0_POS (t_cooi){LP + TR - PR,		TP - PTP - PR2, 0}
+# define P1_POS (t_cooi){LP + TR2 + PTP,	TP + 10, 0}
+# define P2_POS (t_cooi){LP + TR2 + PTP,	TP + 255, 0}
+# define P3_POS (t_cooi){TR + 140 - PR,		TP + TR2 + PTP, 0}
+# define P4_POS (t_cooi){TR - 140 - PR,		TP + TR2 + PTP, 0}
+# define P5_POS (t_cooi){LP - PTP - PR2,	TP + 255, 0}
+# define P6_POS (t_cooi){LP - PTP - PR2,	TP + 10, 0}
 
 /*
 ** *****************************************************************************
