@@ -144,11 +144,11 @@ typedef enum	e_owntype
 	hard_lock = 2,
 }				t_owntype;
 /*
-** 'enum e_mutaff'	Philosopher's lock status toward one mutex.
+** 'enum e_philock' Philosopher's lock status toward one mutex.
 */
 typedef enum	e_philock
 {
-	rejecting = 0,
+	ignoring = 0,
 	waiting = 1,
 	locking = 2,
 }				t_philock;
@@ -168,8 +168,6 @@ typedef enum	e_philock
 **		(use const t_env as soon as possible)
 */
 typedef pthread_mutex_t		t_mutex;
-# define CS_ENV const struct s_env
-
 typedef struct	s_env
 {
 	t_graph		g;
@@ -180,17 +178,22 @@ typedef struct	s_env
 //** **************************************************************************
 //** **************************************************************************
 //** **************************************************************************
-	t_mutex		mutex[7];
-	t_owntype	own_type[7];
+	t_mutex		mutex[7]; //RESSOURCE PARTAGEE
+	t_owntype	own_type[7]; //RESSOURCE PARTAGEE
 	/*
 		own_type:
 			By Main:	Game_start			=> available
 			By philo: 	After mutex_lock	=> hard_lock
 			By philo: 	After mutex_unlock	=> available
+
+			est-ce qu'on ignore totalement le thinking ?
+			c'est problematique a mettre ici vu que c'est de la ressource partagee
+			sinon on laisse le travail sur set cette variable au main-thread.
 	*/
-	int			owner[7]; //initialiser à -1, reset à -1 quand dispo
+	int			owner[7]; //RESSOURCE PARTAGEE
+	//initialiser à -1, reset à -1 quand dispo (pour le redraw)
 	/*
-		own_type:
+		own_type: Edition seulement quand posession du mutex
 			By Main:	Game_start			=> -1
 			By philo:	After mutex_lock	=> Philo id
 			By philo:	After mutex_unlock	=> -1
@@ -206,7 +209,7 @@ typedef struct	s_env
 			Game_start		=> start
 			on_rest_start	=> rest
 			on_wait_start	=> wait
-			on_wait_end		=> eat
+			on_wait_end		=> eat/think
 	*/
 	time_t		act_end_time[7];//set par philo, on_action_start
 	int			eating_delta[7];//set par le philo, on_eat_start
@@ -218,10 +221,10 @@ typedef struct	s_env
 			Game_start		=> 0
 			Before lock		=> waiting
 			After lock		=> locking
-			After unlock	=> rejecting
+			After unlock	=> ignoring
 	*/
 }				t_env;
-
+# define CS_ENV const struct s_env
 typedef CS_ENV	t_cenv;
 
 /*
@@ -244,8 +247,8 @@ typedef CS_ENV	t_cenv;
 ** ISLPICK, Is left philosopher picking.
 ** ISRPICK, Is right philosopher picking.
 */
-# ISLPICKNG(pid) (e->act_end_time[P_LPID(pid)] <= curtime)
-# ISRPICKNG(pid) (e->act_end_time[P_RPID(pid)] <= curtime)
+# define ISLPICKNG(pid) (e->act_end_time[P_LPID(pid)] <= curtime)
+# define ISRPICKNG(pid) (e->act_end_time[P_RPID(pid)] <= curtime)
 
 /*
 ** *****************************************************************************
@@ -265,21 +268,29 @@ typedef struct	s_thread
 
 /*
 ** *****************************************************************************
+** *********************************PROTOTYPES**********************************
+** *****************************************************************************
 */
 
 int				phi_init_env(t_env *e, t_thread tid[7]);
+void			*phi_thread_split(void *ptr);
+void			phi_leave_correctly(t_env *e, int nthrd, int nmutx, char *msg);
+/*
+**Mlx
+*/
 int				phi_init_mlx(t_env *e);
 void			phi_pause_mlx(t_env *e);
+int				phi_loop_hook(void *envp);
 int				phi_redraw_surface(t_cenv *e);
 int				phi_quit_mlx(t_graph *g);
-void			phi_redraw_image(t_cenv *e);
-int				phi_loop_hook(void *envp);
-void			*phi_thread_split(void *ptr);
 int				phi_puts_pix(const t_graph *e, t_cooi coo, t_co c);
 int				phi_put_string(const t_graph *e, t_cooi coo, t_co c, char *str);
-void			phi_puttable(const t_graph *g);
+/*
+** Redraw
+*/
+void			phi_redraw_image(t_cenv *e);
 void			phi_putphilo(const t_graph *g);
-void			phi_leave_correctly(t_env *e, int nthrd, int nmutx, char *msg);
+void			phi_puttable(const t_graph *g);
 void			phi_put_strings(t_cenv *e);
 
 /*
