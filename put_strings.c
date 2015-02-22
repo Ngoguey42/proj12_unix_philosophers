@@ -16,8 +16,6 @@
 #define BOT_PAD ACOOTOI(10, PHILO_RADIUS * 2 + 15, 0)
 #define MID_PAD ACOOTOI(27, PHILO_RADIUS + 4, 0)
 
-#define P_ICOOADD(A, B) ACOOTOI((A).x + (B).x, (A).y + (B).y, 0)
-
 #define HP_TOP(P) P_ICOOADD((P), TOP_PAD)
 #define HP_BOT(P) P_ICOOADD((P), BOT_PAD)
 #define ID_MID(P) P_ICOOADD((P), MID_PAD)

@@ -81,6 +81,31 @@ typedef enum	e_owntype
 # define TABLE_RADIUS 200
 
 # define PHILO_RADIUS 30
+# define PHILO_TABLEPAD 10
+
+# define STICK_LEN 25
+
+# ifndef POSITIONS_ABREVIATIONS
+#  define POSITIONS_ABREVIATIONS
+
+#  define LP TABLE_LEFTPAD
+#  define TP TABLE_TOPPAD
+#  define TR TABLE_RADIUS
+#  define TR2 TABLE_RADIUS * 2
+#  define HTR TABLE_RADIUS / 2
+
+#  define PR PHILO_RADIUS
+#  define PR2 PHILO_RADIUS * 2
+#  define PTP PHILO_TABLEPAD
+
+#  define SL STICK_LEN
+# endif
+
+# ifndef PHILO_COORD_MACROS
+#  define PHILO_COORD_MACROS
+#  define P_ICOOADD(A, B) ACOOTOI((A).x + (B).x, (A).y + (B).y, 0)
+#  define P_ACOOADD(A, X, Y) ACOOTOI((A).x + (X), (A).y + (Y), 0)
+# endif
 
 # define P0_POS (t_cooi){600 - PHILO_RADIUS, 240 - PHILO_RADIUS * 2, 0}
 # define P1_POS (t_cooi){810, 260, 0}
@@ -128,7 +153,7 @@ typedef struct	s_env
 //sticks
 	t_mutex		mutex[7];
 	t_owntype	own_type[7];
-	int			owner[7];
+	int			owner[7]; //initialiser à -1, reset à -1 quand dispo
 
 	
 	//philos
@@ -162,12 +187,26 @@ typedef struct	s_thread
 	int			id;
 }				t_thread;
 
-/* typedef struct	s_stick */
-/* { */
-/* 	t_cooi		coo; */
-/* 	int			stick_id; */
-/* 	t_sstat		stick_status; */
-/* }				t_stick; */
+// typedef enum	e_spos
+// {
+	// right,
+	// available,
+	// left,
+// }				t_spos;
+
+typedef enum	e_sdir
+{
+	horiz,
+	vert,
+}				t_sdir;
+
+typedef struct	s_stick
+{
+	t_cooi		coo;
+	int			stick_id;
+	int			owner;
+	t_sdir		direction;
+}				t_stick;
 
 
 /*

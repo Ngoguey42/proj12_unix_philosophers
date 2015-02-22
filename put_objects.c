@@ -21,7 +21,6 @@ static void	draw_row(const t_graph *g, int row, int pad, int rad)
 	{
 		/* qprintf("%d %d\n", i + TABLE_LEFTPAD, row); */
 		phi_puts_pix(g, ACOOTOI(i++ + pad, row, 0),
-
 			(t_co){{0, 0, 75, 150}});
 	}
 	return ;
