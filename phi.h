@@ -140,7 +140,7 @@ typedef enum	e_pstat
 typedef enum	e_owntype
 {
 	available = 0,
-	soft_lock = 1,
+	// soft_lock = 1,
 	hard_lock = 2,
 }				t_owntype;
 /*
@@ -247,9 +247,12 @@ typedef CS_ENV	t_cenv;
 ** ISLPICK, Is left philosopher picking.
 ** ISRPICK, Is right philosopher picking.
 */
-# define ISLPICKNG(pid) (e->act_end_time[P_LPID(pid)] <= curtime)
-# define ISRPICKNG(pid) (e->act_end_time[P_RPID(pid)] <= curtime)
-
+# define ISLPICKNG	(e->act_end_time[P_LPID(id)] <= e->last_time)
+# define ISRPICKNG	(e->act_end_time[P_RPID(id)] <= e->last_time)
+# define P_HP		(e->phi_hp[id])
+# define P_LPHP		(e->phi_hp[P_LPID(id)])
+# define P_RPHP		(e->phi_hp[P_RPID(id)])
+# define P_ACT		(e->official_s[P_RPID(id)])
 /*
 ** *****************************************************************************
 */

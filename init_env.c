@@ -13,6 +13,7 @@
 #include <phi.h>
 #include <time.h>
 #include <stdlib.h>
+#include <stdio.h> //sys_errlist
 
 void			phi_leave_correctly(t_env *e, int nthrd, int nmutx, char *msg)
 {
@@ -27,23 +28,40 @@ void			phi_leave_correctly(t_env *e, int nthrd, int nmutx, char *msg)
 	return ;
 }
 
-static void		init_game(t_env *e, t_thread tid[7])
+static void		init_sticks(t_env *e)
 {
 	int		i;
 	int		err;
-	
+
 	i = 0;
 	while (i < 7)
+	{
+		e->own_type[i] = available;
+		e->owner[i] = -1;
 		if ((err = pthread_mutex_init(&e->mutex[i++], NULL)))
-			phi_leave_correctly(e, 0, i, ERR_INIT_MUTEXES);
+			phi_leave_correctly(e, 0, i, sys_errlist[err]);
+	}
+	return ;
+}
+
+static void		init_philosophers(t_env *e, t_thread tid[7])
+{
+	int		i;
+	int		err;
+
 	i = 0;
 	while (i < 7)
 	{
 		tid[i].e = e;
 		tid[i].id = i;
 		e->phi_hp[i] = MAX_LIFE;
+		e->official_s[i] = start;
+		e->act_end_time[i] = 0;
+		e->eating_delta[i] = 1;
+		e->llock[i] = ignoring;
+		e->rlock[i] = ignoring;
 		if ((err = pthread_create(&e->tid[i], NULL, &phi_thread_split, &tid[i])))
-			phi_leave_correctly(e, i, 7, ERR_CREATE_THREADS);
+			phi_leave_correctly(e, i, 7, sys_errlist[err]);
 		i++;
 	}
 	return ;
@@ -57,8 +75,10 @@ int				phi_init_env(t_env *e, t_thread tid[7])
 	if (time(&e->init_time) == (time_t)-1)
 		return (ft_putendl_fd("Could not retrieve time", 2), 1);
 	e->end_time = e->init_time + TIMEOUT;
+	e->last_time = e->init_time;
 	if (phi_init_mlx(e))
 		return (1);
-	init_game(e, tid);
+	init_sticks(e, tid);
+	init_philosophers(e, tid);
 	return (0);
 }

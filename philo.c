@@ -13,12 +13,39 @@
 #include <phi.h>
 #include <unistd.h>
 
+void			phi_eat_start_event(t_env *e, int id){(void)e; (void)id;};
+void			phi_wait_start_event(t_env *e, int id){(void)e; (void)id;};
+void			phi_rest_start_event(t_env *e, int id){(void)e; (void)id;};
+void			phi_think_start_event(t_env *e, int id){(void)e; (void)id;};
+void			phi_eat_end_event(t_env *e, int id){(void)e; (void)id;};
+void			phi_rest_end_event(t_env *e, int id){(void)e; (void)id;};
+void			phi_think_end_event(t_env *e, int id){(void)e; (void)id;};
+void			phi_wait_end_event(t_env *e, int id){(void)e; (void)id;};
+
 void			phi_pick_action(t_env *e, int id)
 {
 	(void)e;
 	(void)id;
-
-
+	if (P_ACT == eating)
+	{
+		phi_eat_end_event(e, id);
+		phi_rest_start_event(e, id);
+	}
+	// if (!ISLPICKNG && !ISRPICKNG)
+	// {
+		// if ()
+		
+	// }
+	// if (P_LHP < P_HP)
+	// {
+		
+	// }
+	// else
+	// {
+		
+	// }
+	// if ()
+	
 	/* setstatus(t_env *e, int id, t_pstat prevstatus, t_pstat newstatus); */
 	/* { */
 	/* 	phi_eat_start_event()   =>lock mutex x2   =>update events  =>update stick status*/
@@ -53,7 +80,7 @@ static void		philo(t_env *e, int id)
 {
 	while (e->play)
 	{
-		if (time(NULL) >= e->act_end_time[id])
+		if (e->last_time >= e->act_end_time[id])
 			phi_pick_action(e, id);
 	}
 	return ;
