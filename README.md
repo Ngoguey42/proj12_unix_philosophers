@@ -6,7 +6,7 @@
 
 <br>
 
-Team: [wide-aze](https://github.com/wide-aze) / [ngoguey](https://github.com/Ngoguey42)].
+Team: [wide-aze](https://github.com/wide-aze) / [ngoguey](https://github.com/Ngoguey42).
  
 ### Content:
 * Dining philosophers emulator.
