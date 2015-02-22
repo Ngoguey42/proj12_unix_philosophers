@@ -43,6 +43,7 @@
 ** *****************************************************************************
 ** 'struct s_grap' Graphical datas. (1 instance, inside main's t_env)
 ** 		'redraw'	bool, screen (t_img) + text overlay redraw
+** 		'redrawt'	bool, text overlay redraw
 **		'serv'		mlx's serv pointer
 **		'win'		mlx's window pointer
 **		's'			screen image datas.
@@ -51,6 +52,7 @@
 typedef struct	s_graph
 {
 	int			redraw;
+	int			redrawt;
 	void		*serv;
 	void		*win;
 	t_img		s;
@@ -142,6 +144,15 @@ typedef enum	e_owntype
 	hard_lock = 2,
 }				t_owntype;
 /*
+** 'enum e_mutaff'	Philosopher's lock status toward one mutex.
+*/
+typedef enum	e_philock
+{
+	rejecting = 0,
+	waiting = 1,
+	locking = 2,
+}				t_philock;
+/*
 ** 'struct s_env' (1 instance, inside 'main' function)
 **		'g'				mlx vars + bool redraw
 **		'stick_s'		stick state (0 free/1 left/2 right)
@@ -200,12 +211,15 @@ typedef struct	s_env
 	time_t		act_end_time[7];//set par philo, on_action_start
 	int			eating_delta[7];//set par le philo, on_eat_start
 
-
-	/* time_t		act_time[7]; */
-	t_pstat		wished_s[7];
-	/* t_	left_relationship[7]; //mon status vis a vis de la G */
-	/* t_	right_relationship[7];//mon status vis a vis de la D */
-	
+	t_philock	llock[7];
+	t_philock	rlock[7];
+	/*
+		'llock' / 'rlock'
+			Game_start		=> 0
+			Before lock		=> waiting
+			After lock		=> locking
+			After unlock	=> rejecting
+	*/
 }				t_env;
 
 typedef CS_ENV	t_cenv;
