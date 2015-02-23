@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
+/*   By: wide-aze <wide-aze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/02/19 11:06:03 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/20 17:45:13 by wide-aze         ###   ########.fr       */
+/*   Created: 2015/02/23 10:38:03 by wide-aze          #+#    #+#             */
+/*   Updated: 2015/02/23 10:52:11 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void		init_sticks(t_env *e)
 		e->own_type[i] = available;
 		e->owner[i] = -1;
 		if ((err = pthread_mutex_init(&e->mutex[i++], NULL)))
-			phi_leave_correctly(e, 0, i, sys_errlist[err]);
+			phi_leave_correctly(e, 0, i, (char*)sys_errlist[err]);
 	}
 	return ;
 }
@@ -60,8 +60,9 @@ static void		init_philosophers(t_env *e, t_thread tid[7])
 		e->eating_delta[i] = 1;
 		e->llock[i] = ignoring;
 		e->rlock[i] = ignoring;
-		if ((err = pthread_create(&e->tid[i], NULL, &phi_thread_split, &tid[i])))
-			phi_leave_correctly(e, i, 7, sys_errlist[err]);
+		if ((err = pthread_create(&e->tid[i], NULL,
+		&phi_thread_split, &tid[i])))
+			phi_leave_correctly(e, i, 7, (char*)sys_errlist[err]);
 		i++;
 	}
 	return ;
@@ -72,13 +73,9 @@ int				phi_init_env(t_env *e, t_thread tid[7])
 	ft_bzero(e, sizeof(t_env));
 	e->play = 1;
 	e->g.redraw = 1;
-	if (time(&e->init_time) == (time_t)-1)
-		return (ft_putendl_fd("Could not retrieve time", 2), 1);
-	e->end_time = e->init_time + TIMEOUT;
-	e->last_time = e->init_time;
 	if (phi_init_mlx(e))
 		return (1);
-	init_sticks(e, tid);
+	init_sticks(e);
 	init_philosophers(e, tid);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/20 17:45:08 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/02/23 11:06:40 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define EAT_T 5
 # define REST_T 3
 # define THINK_T 2
-# define TIMEOUT 5
+# define TIMEOUT 5 
 
 # define STEP 1 //don't use for now
 # define USTEP (STEP * 100000) //don't use for now
@@ -34,8 +34,8 @@
 # define WINDOW_FAIL "Could not create new window.\n"
 # define IMAGE_FAIL "Could not create new image.\n"
 # define IMAGE_DATA_FAIL "Could not retrieve image's data.\n"
-# define ERR_INIT_MUTEXES "Could not init mutexes.\n"
-# define ERR_CREATE_THREADS "Could not create threads.\n"
+//# define ERR_INIT_MUTEXES "Could not init mutexes.\n"
+//# define ERR_CREATE_THREADS "Could not create threads.\n"
 
 /*
 ** *****************************************************************************
@@ -65,8 +65,8 @@ typedef struct	s_graph
 */
 typedef enum	e_sdir
 {
-	horiz,
-	vert,
+	h,
+	v,
 }				t_sdir;
 typedef struct	s_stick
 {
@@ -112,13 +112,13 @@ typedef struct	s_stick
 #  define P_ACOOADD(A, X, Y) ACOOTOI((A).x + (X), (A).y + (Y), 0)
 # endif
 
-# define P0_POS (t_cooi){LP + TR - PR,		TP - PTP - PR2, 0}
-# define P1_POS (t_cooi){LP + TR2 + PTP,	TP + 10, 0}
-# define P2_POS (t_cooi){LP + TR2 + PTP,	TP + 255, 0}
-# define P3_POS (t_cooi){TR + 140 - PR,		TP + TR2 + PTP, 0}
-# define P4_POS (t_cooi){TR - 140 - PR,		TP + TR2 + PTP, 0}
-# define P5_POS (t_cooi){LP - PTP - PR2,	TP + 255, 0}
-# define P6_POS (t_cooi){LP - PTP - PR2,	TP + 10, 0}
+# define P0_POS (t_cooi){LP + TR - PR,			TP - PTP - PR2, 0}
+# define P1_POS (t_cooi){LP + TR2 + PTP,		TP + 10, 0}
+# define P2_POS (t_cooi){LP + TR2 + PTP,		TP + 205, 0}
+# define P3_POS (t_cooi){LP + TR + 140 - PR,	TP + TR2 + PTP, 0}
+# define P4_POS (t_cooi){LP + TR - 140 - PR,	TP + TR2 + PTP, 0}
+# define P5_POS (t_cooi){LP - PTP - PR2,		TP + 205, 0}
+# define P6_POS (t_cooi){LP - PTP - PR2,		TP + 10, 0}
 
 /*
 ** *****************************************************************************
@@ -295,6 +295,7 @@ void			phi_redraw_image(t_cenv *e);
 void			phi_putphilo(const t_graph *g);
 void			phi_puttable(const t_graph *g);
 void			phi_put_strings(t_cenv *e);
+void			phi_put_sticks(t_cenv *e);
 
 /*
 ** *****************************************************************************

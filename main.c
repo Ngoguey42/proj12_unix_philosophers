@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:12 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/20 14:53:11 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/23 10:52:54 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int		check_defines(void)
 {
 	if (MAX_LIFE <= 0 || EAT_T <= 0 || REST_T <= 0 || THINK_T <= 0
 	|| TIMEOUT <= 0)
-		return (1);
+		return (ft_putendl_fd("Bad defines values", 2), 1);
 	return (0);
 }
 
@@ -44,10 +44,6 @@ int				main(void)
 	t_env		e;
 	t_thread	tid[7];
 
-	/* int i; */
-	/* for (i = -10; i < 10 ; i++) */
-		/* qprintf("%3d R%3d  L%3d\n", i, RIGHT_STICK(i), LEFT_STICK(i)); */
-	
 	if (check_defines())
 		return (1);
 	if (phi_init_env(&e, tid))

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/20 12:37:38 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/20 15:30:59 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/23 11:13:49 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,40 +39,10 @@
 #define SPU 20
 #define SPA 40
 
+#define T_S t_stick
 #define P_VCOTOI(R, G, B, A) (t_co){{B, G, R, A}}
 
-const t_stick	s[21]
-{
-	{P_ACOOADD(P0_POS, PR + HSS, PR2 + PTP + SPU), 0, 0, vert},
-	{(t_cooi){LP + TR + HTR, TP + SPA, 0}, 0, -1, vert},
-	{P_ACOOADD(P1_POS, - PTP - SPU - SL, PR - HSS), 0, 1, horiz},
-	
-	{P_ACOOADD(P1_POS, - PTP - SPU - SL, PR + HSS), 1, 1, horiz},
-	{(t_cooi){LP + TR2 - SPA - SL, TP + HTR, 0}, 1, -1, horiz},
-	{P_ACOOADD(P2_POS, - PTP - SPU - SL, PR - HSS), 1, 2, horiz},
-	
-	{P_ACOOADD(P2_POS, - PTP - SPU - SL, PR + HSS), 2, 2, horiz},
-	{(t_cooi){LP + TR2 - SPA - SL, TP + TR + HTR, 0}, 2, -1, horiz},
-	{P_ACOOADD(P3_POS, PR + HSS, - PTP - SPU - SL), 2, 3, vert},
-	
-	{P_ACOOADD(P3_POS, PR - HSS, - PTP - SPU - SL), 3, 3, vert},
-	{(t_cooi){LP + TR, TP + TR2 - SPA - SL, 0}, 3, -1, vert},
-	{P_ACOOADD(P4_POS, PR + HSS, - PTP - SPU - SL), 3, 4, vert},
-	
-	{P_ACOOADD(P4_POS, PR - HSS, - PTP - SPU - SL), 4, 4, vert},
-	{(t_cooi){LP + SPA, TP + TR + HTR, 0}, 4, -1, horiz},
-	{P_ACOOADD(P5_POS, PR2 + PTP + SPU, PR + HSS), 4, 5, horiz},
-	
-	{P_ACOOADD(P5_POS, PR2 + PTP + SPU, PR - HSS), 5, 5, horiz},
-	{(t_cooi){LP + SPA, TP + HTR, 0}, 5, -1, horiz},
-	{P_ACOOADD(P6_POS, PR2 + PTP + SPU, PR + HSS), 5, 6, horiz},
-	
-	{P_ACOOADD(P6_POS, PR2 + PTP + SPU, PR - HSS), 6, 6, horiz},
-	{(t_cooi){LP + HTR, TP + SPA, 0}, 6, -1, vert},
-	{P_ACOOADD(P0_POS, PR - HSS, PR2 + PTP + SPU), 6, 0, vert}
-};
-
-static void	put_horiz(const t_graph *g, t_cooi coo)
+static void		put_horiz(const t_graph *g, t_cooi coo)
 {
 	int		i;
 
@@ -86,7 +56,7 @@ static void	put_horiz(const t_graph *g, t_cooi coo)
 	return ;
 }
 
-static void	put_vert(const t_graph *g, t_cooi coo)
+static void		put_vert(const t_graph *g, t_cooi coo)
 {
 	int		i;
 
@@ -100,20 +70,50 @@ static void	put_vert(const t_graph *g, t_cooi coo)
 	return ;
 }
 
-void		phi_put_sticks(t_cenv *e)
+static t_stick	tstick(int i)
+{
+	const t_stick		s[21] = {
+
+	(const T_S){P_ACOOADD(P0_POS, PR + HSS, PR2 + PTP + SPU), 0, 0, v},
+	(const T_S){(t_cooi){LP + TR + HTR, TP + SPA, 0}, 0, -1, v},
+	(const T_S){P_ACOOADD(P1_POS, -PTP - SPU - SL, PR - HSS), 0, 1, h},
+	(const T_S){P_ACOOADD(P1_POS, -PTP - SPU - SL, PR + HSS), 1, 1, h},
+	(const T_S){(t_cooi){LP + TR2 - SPA - SL, TP + TR - 70, 0}, 1, -1, h},
+	(const T_S){P_ACOOADD(P2_POS, -PTP - SPU - SL, PR - HSS), 1, 2, h},
+	(const T_S){P_ACOOADD(P2_POS, -PTP - SPU - SL, PR + HSS), 2, 2, h},
+	(const T_S){(t_cooi){LP + TR2 - SPA - SL, TP + TR + HTR + 25, 0}, 2, -1, h},
+	(const T_S){P_ACOOADD(P3_POS, PR + HSS, -PTP - SPU - SL), 2, 3, v},
+	(const T_S){P_ACOOADD(P3_POS, PR - HSS, -PTP - SPU - SL), 3, 3, v},
+	(const T_S){(t_cooi){LP + TR, TP + TR2 - SPA - SL, 0}, 3, -1, v},
+	(const T_S){P_ACOOADD(P4_POS, PR + HSS, -PTP - SPU - SL), 3, 4, v},
+	(const T_S){P_ACOOADD(P4_POS, PR - HSS, -PTP - SPU - SL), 4, 4, v},
+	(const T_S){(t_cooi){LP + SPA, TP + TR + HTR + 25, 0}, 4, -1, h},
+	(const T_S){P_ACOOADD(P5_POS, PR2 + PTP + SPU, PR + HSS), 4, 5, h},
+	(const T_S){P_ACOOADD(P5_POS, PR2 + PTP + SPU, PR - HSS), 5, 5, h},
+	(const T_S){(t_cooi){LP + SPA, TP + TR - 70, 0}, 5, -1, h},
+	(const T_S){P_ACOOADD(P6_POS, PR2 + PTP + SPU, PR + HSS), 5, 6, h},
+	(const T_S){P_ACOOADD(P6_POS, PR2 + PTP + SPU, PR - HSS), 6, 6, h},
+	(const T_S){(t_cooi){LP + HTR, TP + SPA, 0}, 6, -1, v},
+	(const T_S){P_ACOOADD(P0_POS, PR - HSS, PR2 + PTP + SPU), 6, 0, v}
+	};
+	return ((t_stick)s[i]);
+}
+
+void			phi_put_sticks(t_cenv *e)
 {
 	int		i;
 
+	i = 0;
 	while (i < 21)
 	{
-		if (e->owner[s[i].stick_id] == s[i].owner)
+		if (e->owner[tstick(i).stick_id] == tstick(i).owner)
 		{
-			if (s[i].direction == horiz)
-				put_horiz(&e->g, s[i].coo);
+			if (tstick(i).direction == h)
+				put_horiz(&e->g, tstick(i).coo);
 			else
-				put_vert(&e->g, s[i].coo);
+				put_vert(&e->g, tstick(i).coo);
 		}
-		i++
+		i++;
 	}
 	return ;
 }
