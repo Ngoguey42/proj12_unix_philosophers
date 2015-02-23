@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/20 11:27:27 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/20 16:58:10 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/23 12:14:45 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@
 #define ID_MID(P) P_ICOOADD((P), MID_PAD)
 
 #define P_VCOTOI(R, G, B, A) (t_co){{B, G, R, A}}
+#define TIME_COO ACOOTOI(LP + TR - 6, TP + TR - 4, 0)
 #define HP_COLOR P_VCOTOI(255, 255, 255, 0)
 #define ID_COLOR P_VCOTOI(255, 255, 255, 0)
+#define TIME_COLOR P_VCOTOI(255, 255, 255, 0)
 
 static void	put_one_hp(const t_graph *g, int hp, t_cooi coo)
 {
@@ -46,6 +48,18 @@ static void	put_one_id(const t_graph *g, int id, t_cooi coo)
 	return ;
 }
 
+static void	put_time(t_cenv *e)
+{
+	char			buf[16];
+	const time_t	tl = e->end_time - e->last_time - 1;
+
+	buf[0] = '\0';
+	buf[15] = '\0';
+	ft_itoa_c((int)tl, buf, 10);
+	phi_put_string(&e->g, TIME_COO, ID_COLOR, buf);
+	return ;
+}
+
 void		phi_put_strings(t_cenv *e)
 {
 	put_one_hp(&e->g, e->phi_hp[0], HP_TOP(P0_POS));
@@ -62,5 +76,6 @@ void		phi_put_strings(t_cenv *e)
 	put_one_id(&e->g, 4, ID_MID(P4_POS));
 	put_one_id(&e->g, 5, ID_MID(P5_POS));
 	put_one_id(&e->g, 6, ID_MID(P6_POS));
+	put_time(e);
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 14:05:05 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/20 17:33:17 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/02/23 12:05:20 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static void		tick(t_env *e, time_t elapsedtime)
 		else
 		{
 			e->phi_hp[i] -= 1 * elapsedtime;
+			if (e->phi_hp[i] <= 0)
+				e->play = 0;
 			e->phi_hp[i] = MAX(e->phi_hp[i], 0);
 		}
 		i++;
@@ -47,11 +49,8 @@ int				phi_loop_hook(void *envp)
 	time_t	curtime;
 
 	e = (t_env*)envp;
-	if (e->g.redraw)
-	{
-		e->g.redraw = 0;
+	if (e->g.redraw || e->g.redrawt)
 		phi_redraw_surface(e);
-	}
 	if (!e->play)
 		phi_leave_correctly(e, 7, 7, "");
 	if (time(&curtime) == (time_t)-1)
@@ -59,6 +58,9 @@ int				phi_loop_hook(void *envp)
 	if (curtime >= e->end_time)
 		phi_leave_correctly(e, 7, 7, LEAVE_MSG);
 	else if (curtime != e->last_time)
+	{
 		tick(e, curtime - e->last_time);
+		e->last_time = curtime;
+	}
 	return (0);
 }

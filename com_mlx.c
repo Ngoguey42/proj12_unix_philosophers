@@ -6,20 +6,12 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/03 07:44:42 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/23 10:51:05 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/02/23 12:12:40 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <phi.h>
 #include <mlx.h>
-
-static void		init_time(t_env *e)
-{
-	if (time(&e->init_time) == (time_t) - 1)
-		return (ft_putendl_fd("Could not retrieve time", 2));
-	e->end_time = e->init_time + TIMEOUT;
-	e->last_time = e->init_time;
-}
 
 int				phi_init_mlx(t_env *e)
 {
@@ -37,16 +29,20 @@ int				phi_init_mlx(t_env *e)
 	if ((g->s.dat = mlx_get_data_addr(g->s.img, &g->s.bpp,
 									&g->s.lsz, &g->s.end)) == NULL)
 		return (ft_dprintf(2, IMAGE_DATA_FAIL), 1);
-	init_time(e);
 	return (0);
 }
 
-int				phi_redraw_surface(t_cenv *e)
+int				phi_redraw_surface(t_env *e)
 {
-	phi_redraw_image(e);
-	phi_put_sticks(e);
+	if (e->g.redraw)
+	{
+		phi_redraw_image(e);
+		phi_put_sticks(e);
+	}
 	mlx_put_image_to_window(e->g.serv, e->g.win, e->g.s.img, 0, 0);
 	phi_put_strings(e);
+	e->g.redraw = 0;
+	e->g.redrawt = 0;
 	return (0);
 }
 

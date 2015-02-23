@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 14:30:02 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/23 10:57:01 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/02/23 12:02:40 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void			phi_wait_end_event(t_env *e, int id){(void)e; (void)id;};
 
 void			phi_pick_action(t_env *e, int id)
 {
+	e->g.redraw = 1;
 	(void)e;
 	(void)id;
 /*	if (P_ACT == eating)

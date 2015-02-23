@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/20 12:37:38 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/23 11:13:49 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/02/23 11:53:04 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@
 ** SPU: Stick Pad from table's border, when used
 ** SPA: Stick Pad from table's border, when available
 */
-#define SS 16
+#define SS 10
 #define HSS SS / 2
-#define SPU 20
+#define SPU 10
 #define SPA 40
 
 #define T_S t_stick
@@ -78,19 +78,19 @@ static t_stick	tstick(int i)
 	(const T_S){(t_cooi){LP + TR + HTR, TP + SPA, 0}, 0, -1, v},
 	(const T_S){P_ACOOADD(P1_POS, -PTP - SPU - SL, PR - HSS), 0, 1, h},
 	(const T_S){P_ACOOADD(P1_POS, -PTP - SPU - SL, PR + HSS), 1, 1, h},
-	(const T_S){(t_cooi){LP + TR2 - SPA - SL, TP + TR - 70, 0}, 1, -1, h},
+	(const T_S){(t_cooi){LP + TR2 - SPA - SL, TP + TR - 69, 0}, 1, -1, h},
 	(const T_S){P_ACOOADD(P2_POS, -PTP - SPU - SL, PR - HSS), 1, 2, h},
 	(const T_S){P_ACOOADD(P2_POS, -PTP - SPU - SL, PR + HSS), 2, 2, h},
-	(const T_S){(t_cooi){LP + TR2 - SPA - SL, TP + TR + HTR + 25, 0}, 2, -1, h},
+	(const T_S){(t_cooi){LP + TR2 - SPA - SL, TP + TR + HTR + 20, 0}, 2, -1, h},
 	(const T_S){P_ACOOADD(P3_POS, PR + HSS, -PTP - SPU - SL), 2, 3, v},
 	(const T_S){P_ACOOADD(P3_POS, PR - HSS, -PTP - SPU - SL), 3, 3, v},
 	(const T_S){(t_cooi){LP + TR, TP + TR2 - SPA - SL, 0}, 3, -1, v},
 	(const T_S){P_ACOOADD(P4_POS, PR + HSS, -PTP - SPU - SL), 3, 4, v},
 	(const T_S){P_ACOOADD(P4_POS, PR - HSS, -PTP - SPU - SL), 4, 4, v},
-	(const T_S){(t_cooi){LP + SPA, TP + TR + HTR + 25, 0}, 4, -1, h},
+	(const T_S){(t_cooi){LP + SPA, TP + TR + HTR + 20, 0}, 4, -1, h},
 	(const T_S){P_ACOOADD(P5_POS, PR2 + PTP + SPU, PR + HSS), 4, 5, h},
 	(const T_S){P_ACOOADD(P5_POS, PR2 + PTP + SPU, PR - HSS), 5, 5, h},
-	(const T_S){(t_cooi){LP + SPA, TP + TR - 70, 0}, 5, -1, h},
+	(const T_S){(t_cooi){LP + SPA, TP + TR - 69, 0}, 5, -1, h},
 	(const T_S){P_ACOOADD(P6_POS, PR2 + PTP + SPU, PR + HSS), 5, 6, h},
 	(const T_S){P_ACOOADD(P6_POS, PR2 + PTP + SPU, PR - HSS), 6, 6, h},
 	(const T_S){(t_cooi){LP + HTR, TP + SPA, 0}, 6, -1, v},

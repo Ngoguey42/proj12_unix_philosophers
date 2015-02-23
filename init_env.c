@@ -6,7 +6,7 @@
 /*   By: wide-aze <wide-aze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/23 10:38:03 by wide-aze          #+#    #+#             */
-/*   Updated: 2015/02/23 10:52:11 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/02/23 12:14:54 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,10 @@ int				phi_init_env(t_env *e, t_thread tid[7])
 	e->g.redraw = 1;
 	if (phi_init_mlx(e))
 		return (1);
+	if (time(&e->last_time) == (time_t) - 1)
+		phi_leave_correctly(e, 0, 0, "Could not retrieve time\n");
+	e->end_time = e->last_time + TIMEOUT + 1;
+	e->init_time = e->last_time;
 	init_sticks(e);
 	init_philosophers(e, tid);
 	return (0);

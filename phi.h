@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/23 11:06:40 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/02/23 12:13:12 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@
 # include <time.h>
 #include <ft_debug.h> //debug
 
-# define MAX_LIFE 100
+# define MAX_LIFE 10
 # define EAT_T 5
 # define REST_T 3
 # define THINK_T 2
-# define TIMEOUT 5 
+# define TIMEOUT 5
 
 # define STEP 1 //don't use for now
 # define USTEP (STEP * 100000) //don't use for now
@@ -114,10 +114,10 @@ typedef struct	s_stick
 
 # define P0_POS (t_cooi){LP + TR - PR,			TP - PTP - PR2, 0}
 # define P1_POS (t_cooi){LP + TR2 + PTP,		TP + 10, 0}
-# define P2_POS (t_cooi){LP + TR2 + PTP,		TP + 205, 0}
-# define P3_POS (t_cooi){LP + TR + 140 - PR,	TP + TR2 + PTP, 0}
-# define P4_POS (t_cooi){LP + TR - 140 - PR,	TP + TR2 + PTP, 0}
-# define P5_POS (t_cooi){LP - PTP - PR2,		TP + 205, 0}
+# define P2_POS (t_cooi){LP + TR2 + PTP,		TP + 215, 0}
+# define P3_POS (t_cooi){LP + TR + 110 - PR,	TP + TR2 + PTP, 0}
+# define P4_POS (t_cooi){LP + TR - 110 - PR,	TP + TR2 + PTP, 0}
+# define P5_POS (t_cooi){LP - PTP - PR2,		TP + 215, 0}
 # define P6_POS (t_cooi){LP - PTP - PR2,		TP + 10, 0}
 
 /*
@@ -284,7 +284,7 @@ void			phi_leave_correctly(t_env *e, int nthrd, int nmutx, char *msg);
 int				phi_init_mlx(t_env *e);
 void			phi_pause_mlx(t_env *e);
 int				phi_loop_hook(void *envp);
-int				phi_redraw_surface(t_cenv *e);
+int				phi_redraw_surface(t_env *e);
 int				phi_quit_mlx(t_graph *g);
 int				phi_puts_pix(const t_graph *e, t_cooi coo, t_co c);
 int				phi_put_string(const t_graph *e, t_cooi coo, t_co c, char *str);
