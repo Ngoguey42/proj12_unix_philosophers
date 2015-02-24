@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 14:30:02 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/23 12:02:40 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/24 09:13:27 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ void			phi_pick_action(t_env *e, int id)
 	num sticks available (0/1/2)
 	time left on stick left
 	time left on stick right
-	is left available
-	is right available
 
  */
 

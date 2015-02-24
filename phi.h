@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/23 12:13:12 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/24 08:59:53 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,13 +246,26 @@ typedef CS_ENV	t_cenv;
 /*
 ** ISLPICK, Is left philosopher picking.
 ** ISRPICK, Is right philosopher picking.
+**
+** ISLAVAILABLE, Is left stick available.
+** ISRAVAILABLE, Is right stick available.
+**
+** LS_TIME_LEFT, Left stick time left.
+** RS_TIME_LEFT, Right stick time left.
+**
+** P_HP, Left stick time left.
+** P_LPHP, Left stick time left.
+** P_RPHP, Left stick time left.
+** P_ACT, Official status for .
 */
-# define ISLPICKNG	(e->act_end_time[P_LPID(id)] <= e->last_time)
-# define ISRPICKNG	(e->act_end_time[P_RPID(id)] <= e->last_time)
-# define P_HP		(e->phi_hp[id])
-# define P_LPHP		(e->phi_hp[P_LPID(id)])
-# define P_RPHP		(e->phi_hp[P_RPID(id)])
-# define P_ACT		(e->official_s[P_RPID(id)])
+# define ISLPICKNG		(e->act_end_time[P_LPID(id)] <= e->last_time)
+# define ISRPICKNG		(e->act_end_time[P_RPID(id)] <= e->last_time)
+# define ISLAVAILABLE	(e->own_type[P_LSID(id)] == 0)
+# define ISRAVAILABLE	(e->own_type[P_RSID(id)] == 0)
+# define P_HP			(e->phi_hp[id])
+# define P_LPHP			(e->phi_hp[P_LPID(id)])
+# define P_RPHP			(e->phi_hp[P_RPID(id)])
+# define P_ACT			(e->official_s[P_RPID(id)])
 /*
 ** *****************************************************************************
 */
