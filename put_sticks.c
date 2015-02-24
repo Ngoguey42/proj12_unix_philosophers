@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/20 12:37:38 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/23 11:53:04 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/24 07:20:54 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@
 ** SPU: Stick Pad from table's border, when used
 ** SPA: Stick Pad from table's border, when available
 */
-#define SS 10
+#define SS 40
 #define HSS SS / 2
-#define SPU 10
-#define SPA 40
+#define SPU -15
+#define SPA 20
 
 #define T_S t_stick
 #define P_VCOTOI(R, G, B, A) (t_co){{B, G, R, A}}
@@ -106,7 +106,7 @@ void			phi_put_sticks(t_cenv *e)
 	i = 0;
 	while (i < 21)
 	{
-		if (e->owner[tstick(i).stick_id] == tstick(i).owner)
+		if (e->owner[tstick(i).stick_id] == tstick(i).owner || 1)
 		{
 			if (tstick(i).direction == h)
 				put_horiz(&e->g, tstick(i).coo);

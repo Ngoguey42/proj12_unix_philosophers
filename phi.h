@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/23 12:13:12 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/24 09:09:25 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define EAT_T 5
 # define REST_T 3
 # define THINK_T 2
-# define TIMEOUT 5
+# define TIMEOUT 50
 
 # define STEP 1 //don't use for now
 # define USTEP (STEP * 100000) //don't use for now
@@ -132,7 +132,8 @@ typedef enum	e_pstat
 	rest = 1,
 	think = 2,
 	eat = 3,
-	await = 4,
+	wthink = 4,
+	weat = 5,
 }				t_pstat;
 /*
 ** 'enum e_owntype'	Type of ownership for a Stick
@@ -140,17 +141,19 @@ typedef enum	e_pstat
 typedef enum	e_owntype
 {
 	available = 0,
-	// soft_lock = 1,
-	hard_lock = 2,
+	soft_locked = 1,
+	hard_locked = 2,
 }				t_owntype;
 /*
 ** 'enum e_philock' Philosopher's lock status toward one mutex.
 */
 typedef enum	e_philock
 {
-	ignoring = 0,
-	waiting = 1,
-	locking = 2,
+	ignored = 0,
+	waited = 1, //processus figer
+	think_with = 2,
+	stolen = 3,
+	eat_with = 4,
 }				t_philock;
 /*
 ** 'struct s_env' (1 instance, inside 'main' function)
@@ -172,6 +175,7 @@ typedef struct	s_env
 {
 	t_graph		g;
 	int			play;		//set par emulateur, update apres HPupdate
+	int			stick_state_change;
 	time_t		init_time;
 	time_t		last_time; //game time, used to update HP
 	time_t		end_time;
@@ -179,7 +183,7 @@ typedef struct	s_env
 //** **************************************************************************
 //** **************************************************************************
 	t_mutex		mutex[7]; //RESSOURCE PARTAGEE
-	t_owntype	own_type[7]; //RESSOURCE PARTAGEE
+	t_owntype	own_type[7];
 	/*
 		own_type:
 			By Main:	Game_start			=> available
@@ -190,7 +194,7 @@ typedef struct	s_env
 			c'est problematique a mettre ici vu que c'est de la ressource partagee
 			sinon on laisse le travail sur set cette variable au main-thread.
 	*/
-	int			owner[7]; //RESSOURCE PARTAGEE
+	int			owner[7];
 	//initialiser à -1, reset à -1 quand dispo (pour le redraw)
 	/*
 		own_type: Edition seulement quand posession du mutex
@@ -216,7 +220,12 @@ typedef struct	s_env
 
 	t_philock	llock[7];
 	t_philock	rlock[7];
-	/*
+
+	int			r_asked[7];//set par le philo de droite
+	int			l_asked[7];//set par le philo de gauche
+
+/*
+
 		'llock' / 'rlock'
 			Game_start		=> 0
 			Before lock		=> waiting
@@ -252,8 +261,25 @@ typedef CS_ENV	t_cenv;
 # define P_HP		(e->phi_hp[id])
 # define P_LPHP		(e->phi_hp[P_LPID(id)])
 # define P_RPHP		(e->phi_hp[P_RPID(id)])
-# define P_ACT		(e->official_s[P_RPID(id)])
+# define P_ACT		(e->official_s[id])
+
+
+
+
+
+
 /*
+** S_LP_RLOCK, Left philosopher's right lock status (from stick)
+** S_RP_LLOCK, Right philosopher's left lock status (from stick)
+*/
+# define S_LP_RLOCK(sid) (e->rlock[S_LPID(sid)])
+# define S_RP_LLOCK(sid) (e->llock[S_RPID(sid)])
+# define P_LLOCK(pid) (e->llock[pid])
+# define P_RLOCK(pid) (e->rlock[pid])
+# define ISLASKED (e->l_asked[id])
+# define ISRASKED (e->r_asked[id])
+/*
+
 ** *****************************************************************************
 */
 typedef struct	s_thread

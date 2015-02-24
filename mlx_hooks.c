@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 14:05:05 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/23 12:05:20 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/24 09:11:23 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,34 @@ static void		tick(t_env *e, time_t elapsedtime)
 		}
 		i++;
 	}
+	e->g.redrawt = 1;
+	return ;
+}
+
+static void		update_sticks_off_stats(t_env *e)
+{
+	int		i;
+
+	i = 0;
+	while (i < 7)
+	{
+		if (S_RP_LLOCK(i) == eat_with || S_LP_RLOCK(i) == eat_with)
+		{
+			e->own_type[i] = hard_locked;
+			e->owner[i] = (S_RP_LLOCK(i) == eat_with) ? S_RPID(i) : S_LPID(i);
+		}
+		else if (S_RP_LLOCK(i) == think_with || S_LP_RLOCK(i) == think_with)
+		{
+			e->own_type[i] = soft_locked;
+			e->owner[i] = (S_RP_LLOCK(i) == think_with) ? S_RPID(i) : S_LPID(i);
+		}
+		else
+		{
+			e->own_type[i] = available;
+			e->owner[i] = -1;
+		}
+	}
+	e->g.redraw = 1;
 	return ;
 }
 
@@ -49,8 +77,6 @@ int				phi_loop_hook(void *envp)
 	time_t	curtime;
 
 	e = (t_env*)envp;
-	if (e->g.redraw || e->g.redrawt)
-		phi_redraw_surface(e);
 	if (!e->play)
 		phi_leave_correctly(e, 7, 7, "");
 	if (time(&curtime) == (time_t)-1)
@@ -62,5 +88,9 @@ int				phi_loop_hook(void *envp)
 		tick(e, curtime - e->last_time);
 		e->last_time = curtime;
 	}
+	if (e->stick_state_change)
+		update_sticks_off_stats(e);
+	if (e->g.redraw || e->g.redrawt)
+		phi_redraw_surface(e);
 	return (0);
 }
