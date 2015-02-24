@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/24 09:36:48 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/02/24 10:39:17 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@
 # define WINDOW_FAIL "Could not create new window.\n"
 # define IMAGE_FAIL "Could not create new image.\n"
 # define IMAGE_DATA_FAIL "Could not retrieve image's data.\n"
-//# define ERR_INIT_MUTEXES "Could not init mutexes.\n"
-//# define ERR_CREATE_THREADS "Could not create threads.\n"
 
 /*
 ** *****************************************************************************
@@ -68,6 +66,7 @@ typedef enum	e_sdir
 	h,
 	v,
 }				t_sdir;
+
 typedef struct	s_stick
 {
 	t_cooi		coo;
