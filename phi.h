@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/24 09:18:19 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/02/24 09:36:48 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -311,6 +311,21 @@ typedef struct	s_thread
 int				phi_init_env(t_env *e, t_thread tid[7]);
 void			*phi_thread_split(void *ptr);
 void			phi_leave_correctly(t_env *e, int nthrd, int nmutx, char *msg);
+/*
+** Phi action
+*/
+void			phi_eat_start_event(t_env *e, int id);
+void			phi_eat_end_event(t_env *e, int id);
+void			phi_rest_end_event(t_env *e, int id);
+void			phi_rest_start_event(t_env *e, int id);
+void			phi_think_start_event(t_env *e, int id);
+void			phi_think_stolen_event(t_env *e, int id, int isright);
+void			phi_think_end_event(t_env *e, int id);
+void			phi_waiteat_start_event(t_env *e, int id);
+void			phi_waiteat_end_event(t_env *e, int id);
+void			phi_waitthink_start_event(t_env *e, int id);
+void			phi_waitthink_end_event(t_env *e, int id);
+
 /*
 **Mlx
 */
