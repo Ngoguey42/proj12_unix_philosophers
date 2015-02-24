@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/24 11:04:02 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/24 11:19:51 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define MAX_LIFE 300
 # define EAT_T 15
 # define REST_T 10
-# define THINK_T 3
+# define THINK_T 30
 # define TIMEOUT 500
 
 # define STEP 1 //don't use for now

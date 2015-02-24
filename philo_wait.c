@@ -6,7 +6,7 @@
 /*   By: wide-aze <wide-aze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 09:31:40 by wide-aze          #+#    #+#             */
-/*   Updated: 2015/02/24 11:12:02 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/24 11:16:05 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void			phi_waitthink_start_event(t_env *e, int id)//callable en next
 	ptr = (e->think_stick[id] == P_RPID(id)) ? &e->rlock[id] : &e->llock[id];
 	if (*ptr != think_with)
 	{
-		*ptr = think_with;
+		*ptr = waited;
 		pthread_mutex_lock(&e->mutex[e->think_stick[id]]);
 	}
 	phi_waitthink_end_event(e, id);
