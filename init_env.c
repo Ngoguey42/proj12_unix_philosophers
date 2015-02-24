@@ -6,7 +6,7 @@
 /*   By: wide-aze <wide-aze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/23 10:38:03 by wide-aze          #+#    #+#             */
-/*   Updated: 2015/02/24 09:05:19 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/24 09:50:27 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ static void		init_philosophers(t_env *e, t_thread tid[7])
 	int		i;
 	int		err;
 
-	i = 0;
-	while (i < 7)
+	i = -1;
+	while (++i < 7)
 	{
 		tid[i].e = e;
 		tid[i].id = i;
@@ -62,11 +62,12 @@ static void		init_philosophers(t_env *e, t_thread tid[7])
 		e->rlock[i] = ignored;
 		e->r_asked[i] = 0;
 		e->l_asked[i] = 0;
-		if ((err = pthread_create(&e->tid[i], NULL,
-		&phi_thread_split, &tid[i])))
-			phi_leave_correctly(e, i, 7, (char*)sys_errlist[err]);
-		i++;
 	}
+	i = -1;
+	while (++i < 7)
+		if ((err = pthread_create(&e->tid[i], NULL, &phi_thread_split,
+				&tid[i])))
+			phi_leave_correctly(e, i, 7, (char*)sys_errlist[err]);
 	return ;
 }
 

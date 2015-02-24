@@ -6,7 +6,11 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2015/02/24 10:39:17 by wide-aze         ###   ########.fr       */
+=======
+/*   Updated: 2015/02/24 10:09:52 by ngoguey          ###   ########.fr       */
+>>>>>>> 9ec93d654551845c92e8e00a4a9a0f68e959e25d
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +23,11 @@
 # include <time.h>
 #include <ft_debug.h> //debug
 
-# define MAX_LIFE 10
+# define MAX_LIFE 300
 # define EAT_T 5
 # define REST_T 3
 # define THINK_T 2
-# define TIMEOUT 50
+# define TIMEOUT 500
 
 # define STEP 1 //don't use for now
 # define USTEP (STEP * 100000) //don't use for now
@@ -250,7 +254,7 @@ typedef CS_ENV	t_cenv;
 # define S_RPID(sid) (sid)
 # define S_LPID(sid) (sid == 6 ? 0 : sid + 1)
 # define P_RPID(pid) (pid == 0 ? 6 : pid - 1)
-# define P_LPID(pid) (pid == 6 ? 0 pid + 1)
+# define P_LPID(pid) (pid == 6 ? 0 : pid + 1)
 /*
 ** ISLPICK, Is left philosopher picking.
 ** ISRPICK, Is right philosopher picking.
