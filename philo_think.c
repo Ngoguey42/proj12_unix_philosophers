@@ -6,7 +6,7 @@
 /*   By: wide-aze <wide-aze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 09:32:06 by wide-aze          #+#    #+#             */
-/*   Updated: 2015/02/24 14:28:22 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/24 15:05:37 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,9 @@ void			phi_think_end_event(t_env *e, int id)//callable depuis W
     e->rlock[id] = ignored;
     e->stick_state_change = 1;
 	//pick next action
-	e->official_s[id] = rest;
-	//pick next action
-	
+	if (P_LPHP >= P_HP && P_RPHP > P_HP)
+		phi_waiteat_start_event(e, id);
+	else
+		e->official_s[id] = rest;
 	return ;
 }

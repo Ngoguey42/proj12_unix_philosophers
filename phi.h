@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/24 11:52:05 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/24 15:06:26 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@
 # include <time.h>
 #include <ft_debug.h> //debug
 
-# define MAX_LIFE 300
+# define MAX_LIFE 31
 # define EAT_T 15
-# define REST_T 10
+# define REST_T 3
 # define THINK_T 10
-# define TIMEOUT 25
+# define TIMEOUT 250
 
 # define STEP 1 //don't use for now
 # define USTEP (STEP * 100000) //don't use for now
