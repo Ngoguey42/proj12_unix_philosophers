@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 14:05:05 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/24 10:45:15 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/24 14:35:50 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int				phi_loop_hook(void *envp)
 		tick(e, curtime - e->last_time);
 		e->last_time = curtime;
 	}
-	if (e->stick_state_change)
+	if (e->stick_state_change || 1)
 		update_sticks_off_stats(e);
 	if (e->g.redraw || e->g.redrawt)
 		phi_redraw_surface(e);

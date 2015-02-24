@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/20 12:37:38 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/24 10:31:15 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/24 14:46:18 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,28 +42,28 @@
 #define T_S t_stick
 #define P_VCOTOI(R, G, B, A) (t_co){{B, G, R, A}}
 
-static void		put_horiz(const t_graph *g, t_cooi coo)
+static void		put_horiz(const t_graph *g, t_cooi coo, t_co c)
 {
 	int		i;
 
 	i = 0;
 	while (i < STICK_LEN)
 	{
-		phi_puts_pix(g, coo, P_VCOTOI(210, 210, 30, 0));
+		phi_puts_pix(g, coo, c);
 		coo.x++;
 		i++;
 	}
 	return ;
 }
 
-static void		put_vert(const t_graph *g, t_cooi coo)
+static void		put_vert(const t_graph *g, t_cooi coo, t_co c)
 {
 	int		i;
 
 	i = 0;
 	while (i < STICK_LEN)
 	{
-		phi_puts_pix(g, coo, P_VCOTOI(210, 210, 30, 0));
+		phi_puts_pix(g, coo, c);
 		coo.y++;
 		i++;
 	}
@@ -109,9 +109,23 @@ void			phi_put_sticks(t_cenv *e)
 		if (e->owner[tstick(i).stick_id] == tstick(i).owner)
 		{
 			if (tstick(i).direction == h)
-				put_horiz(&e->g, tstick(i).coo);
+				put_horiz(&e->g, tstick(i).coo, P_VCOTOI(210, 210, 30, 0));
 			else
-				put_vert(&e->g, tstick(i).coo);
+				put_vert(&e->g, tstick(i).coo, P_VCOTOI(210, 210, 30, 0));
+		}
+		else if (i % 3 == 0 && e->llock[S_RPID(tstick(i).owner)] == stolen)
+		{
+			if (tstick(i).direction == h)
+				put_horiz(&e->g, tstick(i).coo, P_VCOTOI(210, 50, 30, 0));
+			else
+				put_vert(&e->g, tstick(i).coo, P_VCOTOI(210, 50, 30, 0));
+		}
+		else if (i % 3 == 2 && e->rlock[S_LPID(tstick(i).owner)] == stolen)
+		{
+			if (tstick(i).direction == h)
+				put_horiz(&e->g, tstick(i).coo, P_VCOTOI(210, 50, 30, 0));
+			else
+				put_vert(&e->g, tstick(i).coo, P_VCOTOI(210, 50, 30, 0));
 		}
 		i++;
 	}
