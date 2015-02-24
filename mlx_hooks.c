@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 14:05:05 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/24 09:11:23 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/24 10:45:15 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,10 @@ static void		update_sticks_off_stats(t_env *e)
 			e->own_type[i] = available;
 			e->owner[i] = -1;
 		}
+		i++;
 	}
 	e->g.redraw = 1;
+	e->stick_state_change = 0;
 	return ;
 }
 

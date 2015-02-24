@@ -6,7 +6,7 @@
 /*   By: wide-aze <wide-aze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 09:23:23 by wide-aze          #+#    #+#             */
-/*   Updated: 2015/02/24 10:29:44 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/02/24 10:44:16 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,17 @@ void			phi_eat_start_event(t_env *e, int id)
 	e->eating_delta[id] = (MAX_LIFE - e->phi_hp[id]) / EAT_T;
 	e->llock[id] = eat_with;
 	e->rlock[id] = eat_with;
+	e->stick_state_change = 1;
 	return ;
 }
 
 void			phi_eat_end_event(t_env *e, int id)//callable depuis W
 {
 	e->phi_hp[id] = MAX_LIFE;
-	pthread_mutex_unlock(e->mutex[id]);
+	pthread_mutex_unlock(&e->mutex[id]);
 	e->llock[id] = ignored;
 	e->rlock[id] = ignored;
+	e->stick_state_change = 1;
 	phi_rest_start_event(e, id);
 	return ;
 }

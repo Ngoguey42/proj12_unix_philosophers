@@ -6,11 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2015/02/24 10:39:17 by wide-aze         ###   ########.fr       */
-=======
-/*   Updated: 2015/02/24 10:09:52 by ngoguey          ###   ########.fr       */
->>>>>>> 9ec93d654551845c92e8e00a4a9a0f68e959e25d
+/*   Updated: 2015/02/24 10:50:51 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +20,9 @@
 #include <ft_debug.h> //debug
 
 # define MAX_LIFE 300
-# define EAT_T 5
-# define REST_T 3
-# define THINK_T 2
+# define EAT_T 15
+# define REST_T 10
+# define THINK_T 3
 # define TIMEOUT 500
 
 # define STEP 1 //don't use for now
