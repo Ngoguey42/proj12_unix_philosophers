@@ -6,7 +6,7 @@
 /*   By: wide-aze <wide-aze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/23 10:38:03 by wide-aze          #+#    #+#             */
-/*   Updated: 2015/02/23 12:14:54 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/24 09:05:19 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,10 @@ static void		init_philosophers(t_env *e, t_thread tid[7])
 		e->official_s[i] = start;
 		e->act_end_time[i] = 0;
 		e->eating_delta[i] = 1;
-		e->llock[i] = ignoring;
-		e->rlock[i] = ignoring;
+		e->llock[i] = ignored;
+		e->rlock[i] = ignored;
+		e->r_asked[i] = 0;
+		e->l_asked[i] = 0;
 		if ((err = pthread_create(&e->tid[i], NULL,
 		&phi_thread_split, &tid[i])))
 			phi_leave_correctly(e, i, 7, (char*)sys_errlist[err]);
