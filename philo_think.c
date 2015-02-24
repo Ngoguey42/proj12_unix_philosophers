@@ -6,7 +6,7 @@
 /*   By: wide-aze <wide-aze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 09:32:06 by wide-aze          #+#    #+#             */
-/*   Updated: 2015/02/24 09:32:59 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/02/24 11:13:02 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@
 
 void			phi_think_start_event(t_env *e, int id)
 {
-	(void)e; (void)id;
+	e->official_s[id] = think;
+	e->act_end_time[id] = e->last_time + THINK_T;
+	e->llock[id] = eat_with;
+	e->rlock[id] = eat_with;
+	e->stick_state_change = 1;
 	//set les llock && rlock
 	return ;
 }

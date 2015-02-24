@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 09:40:04 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/24 11:01:01 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/24 11:05:21 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void			phi_start_end_event(t_env *e, int id)//callable depuis W
 		}
 		/* pthread_mutex_unlock(&e->mutex[P_LSID(id)]); */
 		e->llock[id] = think_with;
+		e->think_stick[id] = P_LSID(id);
 		phi_waitthink_start_event(e, id);
 	}
 	return ;

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/24 10:50:51 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/24 11:04:02 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,6 +223,7 @@ typedef struct	s_env
 	int			r_asked[7];//set par le philo de droite
 	int			l_asked[7];//set par le philo de gauche
 
+	int			think_stick[7];
 /*
 
 		'llock' / 'rlock'

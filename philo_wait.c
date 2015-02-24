@@ -6,7 +6,7 @@
 /*   By: wide-aze <wide-aze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 09:31:40 by wide-aze          #+#    #+#             */
-/*   Updated: 2015/02/24 10:39:18 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/24 11:12:02 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,21 @@ void			phi_waiteat_end_event(t_env *e, int id)//called after mutex
 
 void			phi_waitthink_start_event(t_env *e, int id)//callable en next
 {
-	(void)e; (void)id;
+	t_philock	*ptr;
+
+	e->official_s[id] = wthink;
+	ptr = (e->think_stick[id] == P_RPID(id)) ? &e->rlock[id] : &e->llock[id];
+	if (*ptr != think_with)
+	{
+		*ptr = think_with;
+		pthread_mutex_lock(&e->mutex[e->think_stick[id]]);
+	}
+	phi_waitthink_end_event(e, id);
+	return ;
 }
 
 void			phi_waitthink_end_event(t_env *e, int id)//called after mutex
 {
-	e->l_asked[P_RPID(id)] = 0;
-	e->r_asked[P_LPID(id)] = 0;
-	phi_eat_start_event(e, id);
+	phi_think_start_event(e, id);
 	return ;
 }
