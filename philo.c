@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 09:40:04 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/24 11:29:35 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/02/24 13:04:47 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,36 @@
 
 void			phi_start_end_event(t_env *e, int id)//callable depuis W
 {
+
 	if (!pthread_mutex_trylock(&e->mutex[P_LSID(id)]))
 	{
-/**/		qprintf("%d locks %d #1\n", id, P_LSID(id));
+		qprintf("%d  locks %d #1\n", id, P_LSID(id));
 		e->llock[id] = eat_with;
 		if (!pthread_mutex_trylock(&e->mutex[P_RSID(id)]))
 		{
-/**/			qprintf("%d locks %d #2\n", id, P_RSID(id));
+			qprintf("%d  locks %d #2\n", id, P_RSID(id));
 			/* qprintf("%d: got both %d %d\n", id, P_RSID(id), P_LSID(id)); */
 			e->rlock[id] = eat_with;
 			phi_waiteat_start_event(e, id);
 			return ;
 		}
-		if (e->official_s[P_RSID(id)] == think ||
-				e->official_s[P_RSID(id)] == wthink)
+		if (e->official_s[P_RPID(id)] == think ||
+				e->official_s[P_RPID(id)] == wthink)
 		{
-/**/		qprintf("%d requs %d #2\n", id, P_RSID(id));
+			qprintf("could have\n");
+			/* 	qprintf("%d  requs %d to %d #2\n", id, P_RSID(id), P_RPID(id)); */
 			phi_waiteat_start_event(e, id);
+			return ;
 		}
 		/* pthread_mutex_unlock(&e->mutex[P_LSID(id)]); */
+		qprintf("%d  waits avec %d #2\n", id, P_LSID(id));
 		e->llock[id] = think_with;
 		e->think_stick[id] = P_LSID(id);
-		phi_waitthink_start_event(e, id);
+		/* phi_waitthink_start_event(e, id); */
+		return ;
 	}
+	qprintf("%d  fails %d #1\n", id, P_LSID(id));
+	phi_rest_start_event(e, id);
 	return ;
 }
 
@@ -65,17 +72,23 @@ static void		philo(t_env *e, int id)
 	f[1] = &phi_rest_end_event;
 	f[2] = &phi_think_end_event;
 	f[3] = &phi_eat_end_event;
+	/* if (id > 2) */
+	/* 	return ; */
 	while (e->play)
 	{
-		if (P_ACT == think)
+		/* qprintf("WHILE %d\n", id); */
+		if (e->official_s[id] == think)
 		{
-			if (P_LLOCK(id) == think_with && ISLASKED)
+			if (e->llock[id] == think_with && e->l_asked[id])
 				phi_think_stolen_event(e, id, 0);
-			else
+			else if (e->rlock[id] == think_with && e->r_asked[id])
 				phi_think_stolen_event(e, id, 1);
 		}
 		if (e->last_time >= e->act_end_time[id])
+		{
+			/* qprintf("%d calling for: %d\n", id, P_ACT); */
 			f[P_ACT](e, id);
+		}
 	}
 	return ;
 }

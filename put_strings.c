@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/20 11:27:27 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/23 12:14:45 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/24 12:53:25 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,19 @@
 #define TOP_PAD ACOOTOI(10, -5, 0)
 #define BOT_PAD ACOOTOI(10, PHILO_RADIUS * 2 + 15, 0)
 #define MID_PAD ACOOTOI(27, PHILO_RADIUS + 4, 0)
+#define LOW_PAD ACOOTOI(20, PHILO_RADIUS  * 2 - 7, 0)
 
 #define HP_TOP(P) P_ICOOADD((P), TOP_PAD)
 #define HP_BOT(P) P_ICOOADD((P), BOT_PAD)
 #define ID_MID(P) P_ICOOADD((P), MID_PAD)
+#define AC_LOW(P) P_ICOOADD((P), LOW_PAD)
 
 #define P_VCOTOI(R, G, B, A) (t_co){{B, G, R, A}}
 #define TIME_COO ACOOTOI(LP + TR - 6, TP + TR - 4, 0)
 #define HP_COLOR P_VCOTOI(255, 255, 255, 0)
 #define ID_COLOR P_VCOTOI(255, 255, 255, 0)
 #define TIME_COLOR P_VCOTOI(255, 255, 255, 0)
+#define STATUS_COLOR P_VCOTOI(255, 255, 255, 0)
 
 static void	put_one_hp(const t_graph *g, int hp, t_cooi coo)
 {
@@ -60,6 +63,20 @@ static void	put_time(t_cenv *e)
 	return ;
 }
 
+static void	put_one_state(const t_graph *g, t_pstat status, t_cooi coo)
+{
+	char			buf[16];
+	const char		*actions[6] = {
+
+	"start", "rest", "think", "eat", "wthink", "weat"};
+	buf[0] = '\0';
+	buf[15] = '\0';
+	ft_sprintf(buf, "%s", actions[status]);
+	phi_put_string(g, coo, STATUS_COLOR, buf);
+	return ;
+}
+
+
 void		phi_put_strings(t_cenv *e)
 {
 	put_one_hp(&e->g, e->phi_hp[0], HP_TOP(P0_POS));
@@ -77,5 +94,12 @@ void		phi_put_strings(t_cenv *e)
 	put_one_id(&e->g, 5, ID_MID(P5_POS));
 	put_one_id(&e->g, 6, ID_MID(P6_POS));
 	put_time(e);
+	put_one_state(&e->g, e->official_s[0], AC_LOW(P0_POS));
+	put_one_state(&e->g, e->official_s[1], AC_LOW(P1_POS));
+	put_one_state(&e->g, e->official_s[2], AC_LOW(P2_POS));
+	put_one_state(&e->g, e->official_s[3], AC_LOW(P3_POS));
+	put_one_state(&e->g, e->official_s[4], AC_LOW(P4_POS));
+	put_one_state(&e->g, e->official_s[5], AC_LOW(P5_POS));
+	put_one_state(&e->g, e->official_s[6], AC_LOW(P6_POS));
 	return ;
 }

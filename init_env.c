@@ -6,7 +6,7 @@
 /*   By: wide-aze <wide-aze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/23 10:38:03 by wide-aze          #+#    #+#             */
-/*   Updated: 2015/02/24 09:50:27 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/24 13:05:17 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,12 @@ static void		init_philosophers(t_env *e, t_thread tid[7])
 	}
 	i = -1;
 	while (++i < 7)
+	{
 		if ((err = pthread_create(&e->tid[i], NULL, &phi_thread_split,
 				&tid[i])))
 			phi_leave_correctly(e, i, 7, (char*)sys_errlist[err]);
+		/* qprintf("%x thread %d \n", e->tid[i], i); */
+	}
 	return ;
 }
 

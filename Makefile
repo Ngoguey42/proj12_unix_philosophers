@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/04 11:28:17 by ngoguey           #+#    #+#              #
-#    Updated: 2015/02/24 09:28:05 by wide-aze         ###   ########.fr        #
+#    Updated: 2015/02/24 13:03:51 by ngoguey          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -28,7 +28,7 @@ INCLUDES = $(INCLUDE) $(LFTIPATH)
 
 BASEFLAGS = -Wall -Wextra -lmlx -lXext -lX11
 CFLAGS = $(BASEFLAGS) -Werror -O2
-DEBUGFLAGS = $(BASEFLAGS) -g
+DEBUGFLAGS = $(BASEFLAGS) -g3 -ggdb 
 
 LFTCALL = all
 LFTRE = re
