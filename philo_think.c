@@ -6,7 +6,7 @@
 /*   By: wide-aze <wide-aze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 09:32:06 by wide-aze          #+#    #+#             */
-/*   Updated: 2015/02/24 12:42:13 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/24 14:28:22 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ void			phi_think_start_event(t_env *e, int id)
 	if (e->rlock[id] == waited)
 		e->rlock[id] = think_with;
 	e->stick_state_change = 1;
-	qprintf("%d  think process OK\n", id);
+	/* qprintf("%d  think process OK\n", id); */
 	return ;
 }
 
 void			phi_think_stolen_event(t_env *e, int id, int isright)
 {
-	qprintf("%s was stoled from his %d\n", id, e->think_stick[id]);
+	/* qprintf("%d was stoled from his %d\n", id, e->think_stick[id]); */
 	pthread_mutex_unlock(&e->mutex[e->think_stick[id]]);
 	if (isright)
 		e->rlock[id] = stolen;

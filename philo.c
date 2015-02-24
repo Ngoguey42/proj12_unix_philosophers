@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 09:40:04 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/24 13:04:47 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/24 14:31:11 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void			phi_start_end_event(t_env *e, int id)//callable depuis W
 
 	if (!pthread_mutex_trylock(&e->mutex[P_LSID(id)]))
 	{
-		qprintf("%d  locks %d #1\n", id, P_LSID(id));
+		/* qprintf("%d  locks %d #1\n", id, P_LSID(id)); */
 		e->llock[id] = eat_with;
 		if (!pthread_mutex_trylock(&e->mutex[P_RSID(id)]))
 		{
-			qprintf("%d  locks %d #2\n", id, P_RSID(id));
+			/* qprintf("%d  locks %d #2\n", id, P_RSID(id)); */
 			/* qprintf("%d: got both %d %d\n", id, P_RSID(id), P_LSID(id)); */
 			e->rlock[id] = eat_with;
 			phi_waiteat_start_event(e, id);
@@ -36,19 +36,20 @@ void			phi_start_end_event(t_env *e, int id)//callable depuis W
 		if (e->official_s[P_RPID(id)] == think ||
 				e->official_s[P_RPID(id)] == wthink)
 		{
-			qprintf("could have\n");
+			/* qprintf("could have\n"); */
 			/* 	qprintf("%d  requs %d to %d #2\n", id, P_RSID(id), P_RPID(id)); */
 			phi_waiteat_start_event(e, id);
 			return ;
 		}
+		/* e->official_s[id] = think; */
 		/* pthread_mutex_unlock(&e->mutex[P_LSID(id)]); */
-		qprintf("%d  waits avec %d #2\n", id, P_LSID(id));
+		/* qprintf("%d  waits avec %d #2\n", id, P_LSID(id)); */
 		e->llock[id] = think_with;
 		e->think_stick[id] = P_LSID(id);
-		/* phi_waitthink_start_event(e, id); */
+		phi_waitthink_start_event(e, id);
 		return ;
 	}
-	qprintf("%d  fails %d #1\n", id, P_LSID(id));
+	/* qprintf("%d  fails %d #1\n", id, P_LSID(id)); */
 	phi_rest_start_event(e, id);
 	return ;
 }
@@ -76,6 +77,7 @@ static void		philo(t_env *e, int id)
 	/* 	return ; */
 	while (e->play)
 	{
+		/* qprintf(""); */
 		/* qprintf("WHILE %d\n", id); */
 		if (e->official_s[id] == think)
 		{

@@ -6,7 +6,7 @@
 /*   By: wide-aze <wide-aze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 09:23:23 by wide-aze          #+#    #+#             */
-/*   Updated: 2015/02/24 12:42:05 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/24 14:28:27 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void			phi_eat_start_event(t_env *e, int id)
 	e->llock[id] = eat_with;
 	e->rlock[id] = eat_with;
 	e->stick_state_change = 1;
-	qprintf("%d  eat process OK\n", id);
+	/* qprintf("%d  eat process OK\n", id); */
 	return ;
 }
 
