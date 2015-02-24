@@ -6,28 +6,26 @@
 /*   By: wide-aze <wide-aze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 09:31:40 by wide-aze          #+#    #+#             */
-/*   Updated: 2015/02/24 14:29:20 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/24 16:52:17 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <phi.h>
 
 /*
-** les fonctions start doivent etre betes, 
+** les fonctions start doivent etre betes,
 ** les fonctions end prennent les decisions,
 */
 
 void			phi_waiteat_start_event(t_env *e, int id)//callable en next
 {
 	t_philock	prev[2];
-	
+
 	e->official_s[id] = weat;
 	e->stick_state_change = 1;
 	e->l_asked[P_RPID(id)] = 1;
 	e->r_asked[P_LPID(id)] = 1;
 	prev[0] = e->llock[id];
-
-
 	prev[1] = e->rlock[id];
 	e->llock[id] = waited;
 	e->rlock[id] = waited;

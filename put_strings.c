@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/20 11:27:27 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/24 12:53:25 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/24 16:36:01 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ static void	put_one_state(const t_graph *g, t_pstat status, t_cooi coo)
 	phi_put_string(g, coo, STATUS_COLOR, buf);
 	return ;
 }
-
 
 void		phi_put_strings(t_cenv *e)
 {

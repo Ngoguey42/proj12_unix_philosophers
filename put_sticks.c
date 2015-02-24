@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/20 12:37:38 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/24 14:46:18 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/24 16:47:31 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,34 +42,6 @@
 #define T_S t_stick
 #define P_VCOTOI(R, G, B, A) (t_co){{B, G, R, A}}
 
-static void		put_horiz(const t_graph *g, t_cooi coo, t_co c)
-{
-	int		i;
-
-	i = 0;
-	while (i < STICK_LEN)
-	{
-		phi_puts_pix(g, coo, c);
-		coo.x++;
-		i++;
-	}
-	return ;
-}
-
-static void		put_vert(const t_graph *g, t_cooi coo, t_co c)
-{
-	int		i;
-
-	i = 0;
-	while (i < STICK_LEN)
-	{
-		phi_puts_pix(g, coo, c);
-		coo.y++;
-		i++;
-	}
-	return ;
-}
-
 static t_stick	tstick(int i)
 {
 	const t_stick		s[21] = {
@@ -99,6 +71,23 @@ static t_stick	tstick(int i)
 	return ((t_stick)s[i]);
 }
 
+static void		put_it(const t_graph *g, t_cooi coo, t_co c, int index)
+{
+	int		i;
+
+	i = 0;
+	while (i < STICK_LEN)
+	{
+		phi_puts_pix(g, coo, c);
+		if (tstick(index).direction == h)
+			coo.x++;
+		else
+			coo.y++;
+		i++;
+	}
+	return ;
+}
+
 void			phi_put_sticks(t_cenv *e)
 {
 	int		i;
@@ -107,26 +96,11 @@ void			phi_put_sticks(t_cenv *e)
 	while (i < 21)
 	{
 		if (e->owner[tstick(i).stick_id] == tstick(i).owner)
-		{
-			if (tstick(i).direction == h)
-				put_horiz(&e->g, tstick(i).coo, P_VCOTOI(210, 210, 30, 0));
-			else
-				put_vert(&e->g, tstick(i).coo, P_VCOTOI(210, 210, 30, 0));
-		}
+			put_it(&e->g, tstick(i).coo, P_VCOTOI(210, 210, 30, 0), i);
 		else if (i % 3 == 0 && e->llock[S_RPID(tstick(i).owner)] == stolen)
-		{
-			if (tstick(i).direction == h)
-				put_horiz(&e->g, tstick(i).coo, P_VCOTOI(210, 50, 30, 0));
-			else
-				put_vert(&e->g, tstick(i).coo, P_VCOTOI(210, 50, 30, 0));
-		}
+			put_it(&e->g, tstick(i).coo, P_VCOTOI(210, 50, 30, 0), i);
 		else if (i % 3 == 2 && e->rlock[S_LPID(tstick(i).owner)] == stolen)
-		{
-			if (tstick(i).direction == h)
-				put_horiz(&e->g, tstick(i).coo, P_VCOTOI(210, 50, 30, 0));
-			else
-				put_vert(&e->g, tstick(i).coo, P_VCOTOI(210, 50, 30, 0));
-		}
+			put_it(&e->g, tstick(i).coo, P_VCOTOI(210, 50, 30, 0), i);
 		i++;
 	}
 	return ;
