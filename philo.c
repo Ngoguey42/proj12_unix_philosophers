@@ -5,9 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/02/19 14:30:02 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/24 09:30:10 by wide-aze         ###   ########.fr       */
-/*   Updated: 2015/02/24 09:12:12 by ngoguey          ###   ########.fr       */
+/*   Created: 2015/02/24 09:40:04 by ngoguey           #+#    #+#             */
+/*   Updated: 2015/02/24 10:38:10 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +20,12 @@
 
 void			phi_start_end_event(t_env *e, int id)//callable depuis W
 {
-	// call first ****_start_event;
-	(void)e; (void)id;
+	if (id == 0)
+	{
+		phi_waiteat_start_event(e, id);
+		qprintf("hello\n");
+	}
+	return ;
 }
 
 /*

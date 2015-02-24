@@ -1,4 +1,4 @@
-;;/* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   philo_wait.c                                       :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: wide-aze <wide-aze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 09:31:40 by wide-aze          #+#    #+#             */
-/*   Updated: 2015/02/24 09:36:16 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/02/24 10:39:18 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,29 @@
 
 void			phi_waiteat_start_event(t_env *e, int id)//callable en next
 {
-	(void)e; (void)id;
+	t_philock	prev[2];
 
-	//request les baguettes aux voisins
-	//lock les mutexes
-	//phi_wait_end_event(e, id);
+	e->official_s[id] = weat;
+	e->l_asked[P_RPID(id)] = 1;
+	e->r_asked[P_LPID(id)] = 1;
+	prev[0] = e->llock[id];
+	prev[1] = e->rlock[id];
+	e->llock[id] = waited;
+	e->rlock[id] = waited;
+	if (prev[0] != eat_with)
+		pthread_mutex_lock(&e->mutex[P_LSID(id)]);
+	if (prev[1] != eat_with)
+		pthread_mutex_lock(&e->mutex[P_RSID(id)]);
+	phi_waiteat_end_event(e, id);
+	return ;
 }
 
 void			phi_waiteat_end_event(t_env *e, int id)//called after mutex
 {
-	//equivalent de On_Mutex_locked
-	
-	//phi_eat_start_event(e, id);
-	(void)e; (void)id;
+	e->l_asked[P_RPID(id)] = 0;
+	e->r_asked[P_LPID(id)] = 0;
+	phi_eat_start_event(e, id);
+	return ;
 }
 
 void			phi_waitthink_start_event(t_env *e, int id)//callable en next
@@ -41,5 +51,8 @@ void			phi_waitthink_start_event(t_env *e, int id)//callable en next
 
 void			phi_waitthink_end_event(t_env *e, int id)//called after mutex
 {
-	(void)e; (void)id;
+	e->l_asked[P_RPID(id)] = 0;
+	e->r_asked[P_LPID(id)] = 0;
+	phi_eat_start_event(e, id);
+	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/20 12:37:38 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/24 07:20:54 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/24 10:31:15 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void			phi_put_sticks(t_cenv *e)
 	i = 0;
 	while (i < 21)
 	{
-		if (e->owner[tstick(i).stick_id] == tstick(i).owner || 1)
+		if (e->owner[tstick(i).stick_id] == tstick(i).owner)
 		{
 			if (tstick(i).direction == h)
 				put_horiz(&e->g, tstick(i).coo);
