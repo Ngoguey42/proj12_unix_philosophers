@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/24 15:06:26 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/25 07:20:14 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 # include <time.h>
 #include <ft_debug.h> //debug
 
-# define MAX_LIFE 31
-# define EAT_T 15
-# define REST_T 3
+# define MAX_LIFE 21
+# define EAT_T 10
+# define REST_T 10
 # define THINK_T 10
 # define TIMEOUT 250
 
@@ -183,37 +183,15 @@ typedef struct	s_env
 //** **************************************************************************
 	t_mutex		mutex[7]; //RESSOURCE PARTAGEE
 	t_owntype	own_type[7];
-	/*
-		own_type:
-			By Main:	Game_start			=> available
-			By philo: 	After mutex_lock	=> hard_lock
-			By philo: 	After mutex_unlock	=> available
-
-			est-ce qu'on ignore totalement le thinking ?
-			c'est problematique a mettre ici vu que c'est de la ressource partagee
-			sinon on laisse le travail sur set cette variable au main-thread.
-	*/
 	int			owner[7];
 	//initialiser à -1, reset à -1 quand dispo (pour le redraw)
-	/*
-		own_type: Edition seulement quand posession du mutex
-			By Main:	Game_start			=> -1
-			By philo:	After mutex_lock	=> Philo id
-			By philo:	After mutex_unlock	=> -1
-	*/
 //** **************************************************************************
 //** **************************************************************************
 //** **************************************************************************
 	pthread_t	tid[7];
 	int			phi_hp[7];//set par l'emulateur
 	t_pstat		official_s[7];//set par le philo
-	/*
-		official_s:
-			Game_start		=> start
-			on_rest_start	=> rest
-			on_wait_start	=> wait
-			on_wait_end		=> eat/think
-	*/
+
 	time_t		act_end_time[7];//set par philo, on_action_start
 	int			eating_delta[7];//set par le philo, on_eat_start
 
@@ -224,14 +202,6 @@ typedef struct	s_env
 	int			l_asked[7];//set par le philo de gauche
 
 	int			think_stick[7];
-/*
-
-		'llock' / 'rlock'
-			Game_start		=> 0
-			Before lock		=> waiting
-			After lock		=> locking
-			After unlock	=> ignoring
-	*/
 }				t_env;
 # define CS_ENV const struct s_env
 typedef CS_ENV	t_cenv;

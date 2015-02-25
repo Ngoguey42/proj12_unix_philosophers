@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/20 11:27:27 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/24 16:36:01 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/02/25 07:15:42 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #define TOP_PAD ACOOTOI(10, -5, 0)
 #define BOT_PAD ACOOTOI(10, PHILO_RADIUS * 2 + 15, 0)
 #define MID_PAD ACOOTOI(27, PHILO_RADIUS + 4, 0)
-#define LOW_PAD ACOOTOI(20, PHILO_RADIUS  * 2 - 7, 0)
+#define LOW_PAD ACOOTOI(-2, PHILO_RADIUS  * 2 - 7, 0)
 
 #define HP_TOP(P) P_ICOOADD((P), TOP_PAD)
 #define HP_BOT(P) P_ICOOADD((P), BOT_PAD)
@@ -35,7 +35,7 @@ static void	put_one_hp(const t_graph *g, int hp, t_cooi coo)
 
 	buf[0] = '\0';
 	buf[127] = '\0';
-	ft_sprintf(buf, "%03d/%-3d", hp, MAX_LIFE);
+	ft_sprintf(buf, "%3d/%-3d", hp, MAX_LIFE);
 	phi_put_string(g, coo, HP_COLOR, buf);
 	return ;
 }
@@ -68,7 +68,12 @@ static void	put_one_state(const t_graph *g, t_pstat status, t_cooi coo)
 	char			buf[16];
 	const char		*actions[6] = {
 
-	"start", "rest", "think", "eat", "wthink", "weat"};
+	"   start   ",
+	"    rest   ",
+	"   think   ",
+	"    eat    ",
+	"w8 to think",
+	" w8 to eat "};
 	buf[0] = '\0';
 	buf[15] = '\0';
 	ft_sprintf(buf, "%s", actions[status]);

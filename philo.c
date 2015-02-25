@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 09:40:04 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/24 16:55:42 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/02/25 07:26:48 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,7 @@ static void		philo(t_env *e, int id)
 				phi_think_stolen_event(e, id, 1);
 		}
 		if (e->last_time >= e->act_end_time[id])
-		{
-//			qprintf("%d calling for: %d\n", id, P_ACT);
 			f[P_ACT](e, id);
-		}
 	}
 	return ;
 }
