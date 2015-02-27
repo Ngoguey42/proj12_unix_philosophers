@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/25 07:20:14 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/27 12:17:08 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 # include <time.h>
 #include <ft_debug.h> //debug
 
-# define MAX_LIFE 21
-# define EAT_T 10
-# define REST_T 10
-# define THINK_T 10
+# define MAX_LIFE 210
+# define EAT_T 13
+# define REST_T 5
+# define THINK_T 7
 # define TIMEOUT 250
 
 # define STEP 1 //don't use for now
@@ -251,6 +251,8 @@ typedef CS_ENV	t_cenv;
 # define P_ACT				(e->official_s[id])
 # define S_LP_RLOCK(sid)	(e->rlock[S_LPID(sid)])
 # define S_RP_LLOCK(sid)	(e->llock[S_RPID(sid)])
+# define P_LP_RLOCK(pid)	(e->rlock[P_LPID(pid)])
+# define P_RP_LLOCK(pid)	(e->llock[P_RPID(pid)])
 # define P_LLOCK(pid)		(e->llock[pid])
 # define P_RLOCK(pid)		(e->rlock[pid])
 # define ISLASKED			(e->l_asked[id])

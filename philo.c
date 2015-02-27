@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 09:40:04 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/25 07:26:48 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/27 14:12:22 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@ void			phi_start_end_event(t_env *e, int id)//callable depuis W
 {
 	if (!pthread_mutex_trylock(&e->mutex[P_LSID(id)]))
 	{
+		qprintf("%d took mutex %s %d\n", id, "LEFT", P_LSID(id));
 //		qprintf("%d  locks %d #1\n", id, P_LSID(id));
 		e->llock[id] = eat_with;
 		if (!pthread_mutex_trylock(&e->mutex[P_RSID(id)]))
 		{
+			qprintf("%d took mutex %s %d\n", id, "RIGHT", P_RSID(id));
 //			qprintf("%d  locks %d #2\n", id, P_RSID(id));
 			e->rlock[id] = eat_with;
 			phi_waiteat_start_event(e, id);

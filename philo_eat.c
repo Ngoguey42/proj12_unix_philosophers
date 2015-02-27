@@ -6,7 +6,7 @@
 /*   By: wide-aze <wide-aze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 09:23:23 by wide-aze          #+#    #+#             */
-/*   Updated: 2015/02/24 16:53:01 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/02/27 14:27:09 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void			phi_eat_start_event(t_env *e, int id)
 	e->official_s[id] = eat;
 	e->act_end_time[id] = e->last_time + EAT_T;
 	e->eating_delta[id] = (MAX_LIFE - e->phi_hp[id]) / EAT_T;
-	e->llock[id] = eat_with;
-	e->rlock[id] = eat_with;
+	/* e->llock[id] = eat_with; */
+	/* e->rlock[id] = eat_with; */
 	e->stick_state_change = 1;
 	/* qprintf("%d  eat process OK\n", id); */
 	return ;
@@ -32,8 +32,12 @@ void			phi_eat_start_event(t_env *e, int id)
 void			phi_eat_end_event(t_env *e, int id)//callable depuis W
 {
 	e->phi_hp[id] = MAX_LIFE;
-	pthread_mutex_unlock(&e->mutex[P_LSID(id)]);
-	pthread_mutex_unlock(&e->mutex[P_RSID(id)]);
+	int	errl, errr;
+	errl = pthread_mutex_unlock(&e->mutex[P_LSID(id)]);
+	errr = pthread_mutex_unlock(&e->mutex[P_RSID(id)]);
+	qprintf("%d unlocked BOTH mutexwa %d %d\n", id
+			,P_RSID(id), P_LSID(id), errr, errl);
+
 	e->llock[id] = ignored;
 	e->rlock[id] = ignored;
 	e->stick_state_change = 1;

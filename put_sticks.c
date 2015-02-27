@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/20 12:37:38 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/24 16:47:31 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/02/27 13:51:27 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,16 +91,46 @@ static void		put_it(const t_graph *g, t_cooi coo, t_co c, int index)
 void			phi_put_sticks(t_cenv *e)
 {
 	int		i;
-
+	t_stick	s;
 	i = 0;
 	while (i < 21)
 	{
-		if (e->owner[tstick(i).stick_id] == tstick(i).owner)
-			put_it(&e->g, tstick(i).coo, P_VCOTOI(210, 210, 30, 0), i);
-		else if (i % 3 == 0 && e->llock[S_RPID(tstick(i).owner)] == stolen)
-			put_it(&e->g, tstick(i).coo, P_VCOTOI(210, 50, 30, 0), i);
-		else if (i % 3 == 2 && e->rlock[S_LPID(tstick(i).owner)] == stolen)
-			put_it(&e->g, tstick(i).coo, P_VCOTOI(210, 50, 30, 0), i);
+		s = tstick(i);
+		if (i % 3 == 0)
+		{
+			if (e->llock[s.owner] == think_with || e->llock[s.owner] == eat_with)
+				put_it(&e->g, tstick(i).coo, P_VCOTOI(210, 210, 30, 0), i);
+			else if (e->llock[s.owner] == stolen)
+				put_it(&e->g, tstick(i).coo, P_VCOTOI(210, 50, 30, 0), i);
+			else if (e->llock[s.owner] == waited)
+				put_it(&e->g, tstick(i).coo, P_VCOTOI(0x66, 0xCC, 0xCC, 0), i);
+		}
+		else if (i % 3 == 2)
+		{
+			if (e->rlock[s.owner] == think_with || e->rlock[s.owner] == eat_with)
+				put_it(&e->g, tstick(i).coo, P_VCOTOI(210, 210, 30, 0), i);
+			else if (e->rlock[s.owner] == stolen)
+				put_it(&e->g, tstick(i).coo, P_VCOTOI(210, 50, 30, 0), i);
+			else if (e->rlock[s.owner] == waited)
+				put_it(&e->g, tstick(i).coo, P_VCOTOI(0x66, 0xCC, 0xCC, 0), i);
+		}
+		else
+		{
+			if (e->owner[s.stick_id] == s.owner)
+				put_it(&e->g, tstick(i).coo, P_VCOTOI(210, 210, 30, 0), i);
+		}
+
+		
+		/* if (e->owner[tstick(i).stick_id] == tstick(i).owner) */
+		/* 	put_it(&e->g, tstick(i).coo, P_VCOTOI(210, 210, 30, 0), i); */
+		/* else if (i % 3 == 0 && e->llock[S_RPID(tstick(i).owner)] == stolen) */
+		/* 	put_it(&e->g, tstick(i).coo, P_VCOTOI(210, 50, 30, 0), i); */
+		/* else if (i % 3 == 2 && e->rlock[S_LPID(tstick(i).owner)] == stolen) */
+		/* 	put_it(&e->g, tstick(i).coo, P_VCOTOI(210, 50, 30, 0), i); */
+		/* else if (i % 3 == 0 && e->llock[S_RPID(tstick(i).owner)] == waited) */
+		/* 	put_it(&e->g, tstick(i).coo, P_VCOTOI(0x66, 0xCC, 0xCC, 0), i); */
+		/* else if (i % 3 == 2 && e->rlock[S_LPID(tstick(i).owner)] == waited) */
+		/* 	put_it(&e->g, tstick(i).coo, P_VCOTOI(0x66, 0xCC, 0xCC, 0), i); */
 		i++;
 	}
 	return ;
