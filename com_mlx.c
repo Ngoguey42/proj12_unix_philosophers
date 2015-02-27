@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/03 07:44:42 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/24 07:08:38 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/27 15:40:34 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int				phi_init_mlx(t_env *e)
 		return (ft_dprintf(2, CONNECTION_FAIL), 1);
 	if (!(g->win = mlx_new_window(g->serv, WIN_X, WIN_Y, "Philosophers")))
 		return (ft_dprintf(2, WINDOW_FAIL), 1);
-//	mlx_expose_hook(g->win, &phi_expose_hook, e);
 	mlx_loop_hook(g->serv, &phi_loop_hook, g);
 	if ((g->s.img = mlx_new_image(g->serv, WIN_X, WIN_Y)) == NULL)
 		return (ft_dprintf(2, IMAGE_FAIL), 1);

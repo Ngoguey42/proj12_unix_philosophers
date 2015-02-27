@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 14:15:24 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/23 11:12:50 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/02/27 17:21:36 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@ static void	draw_row(const t_graph *g, int row, int pad, int rad)
 	i = 0;
 	while (i < rad * 2)
 	{
-		/* qprintf("%d %d\n", i + TABLE_LEFTPAD, row); */
-		phi_puts_pix(g, ACOOTOI(i++ + pad, row, 0),
-			(t_co){{0, 0, 75, 150}});
+		phi_puts_pix(g, ACOOTOI(i + pad, row, 0),(t_co){{0, 0, 75, 150}});//ACOOTOI fait planter la nm
+		i++;
 	}
 	return ;
 }
@@ -51,6 +50,5 @@ void		phi_putphilo(const t_graph *g)
 			draw_row(g, pos[i].y + j++, pos[i].x, PHILO_RADIUS);
 		i++;
 	}
-	
 	return ;
 }

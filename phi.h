@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/27 14:38:34 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/27 17:30:41 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,6 @@
 # define REST_T 1
 # define THINK_T 7
 # define TIMEOUT 250
-
-# define STEP 1 //don't use for now
-# define USTEP (STEP * 100000) //don't use for now
 
 # define LEAVE_MSG "Now, it is time... To DAAAAAAAANCE ! ! !\n"
 # define TIMEFAIL_MSG "Could not retrieve time\n"

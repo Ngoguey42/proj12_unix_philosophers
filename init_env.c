@@ -6,14 +6,14 @@
 /*   By: wide-aze <wide-aze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/23 10:38:03 by wide-aze          #+#    #+#             */
-/*   Updated: 2015/02/27 14:59:22 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/27 15:41:12 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <phi.h>
 #include <time.h>
 #include <stdlib.h>
-#include <stdio.h> //sys_errlist
+#include <stdio.h>
 
 void			phi_leave_correctly(t_env *e, int nthrd, int nmutx, char *msg)
 {
