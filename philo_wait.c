@@ -6,7 +6,7 @@
 /*   By: wide-aze <wide-aze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 09:31:40 by wide-aze          #+#    #+#             */
-/*   Updated: 2015/02/27 14:16:01 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/27 15:28:30 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 void			phi_waiteat_start_event(t_env *e, int id)//callable en next
 {
 	/* t_philock	prev[2]; */
-
 	e->official_s[id] = weat;
 	e->stick_state_change = 1;
 	e->l_asked[P_RPID(id)] = 1;
@@ -31,7 +30,6 @@ void			phi_waiteat_start_event(t_env *e, int id)//callable en next
 	/* e->rlock[id] = (e->rlock[id] == eat_with) ? eat_with : waited; */
 	/* e->llock[id] = waited; */
 	/* e->rlock[id] = waited; */
-	
 	/* if (P_RP_LLOCK(id) == eat_with) */
 	/* if (P_LPHP < P_RPHP) */
 	/* if (P_LP_RLOCK(id) != eat_with) */

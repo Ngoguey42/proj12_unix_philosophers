@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 14:05:05 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/27 14:59:52 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/27 15:27:39 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int				phi_loop_hook(void *envp)
 	if (!e->play)
 		phi_leave_correctly(e, 7, 7, "");
 	if (time(&curtime) == (time_t)-1)
-		phi_leave_correctly(e, 7, 7, "Could not retrieve time\n");
+		phi_leave_correctly(e, 7, 7, TIMEFAIL_MSG);
 	if (curtime >= e->end_time)
 		phi_leave_correctly(e, 7, 7, LEAVE_MSG);
 	else if (curtime != e->last_time)
@@ -92,12 +92,7 @@ int				phi_loop_hook(void *envp)
 	}
 	e->g.redraw = 1;
 	e->g.redrawt = 1;
-	e->stick_state_change = 1;
-	if (e->stick_state_change)
-	{
-		e->stick_state_change = 0;
-		update_sticks_off_stats(e);
-	}
+	update_sticks_off_stats(e);
 	if (e->g.redraw || e->g.redrawt)
 		phi_redraw_surface(e);
 	return (0);

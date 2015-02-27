@@ -6,7 +6,7 @@
 /*   By: wide-aze <wide-aze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 09:23:23 by wide-aze          #+#    #+#             */
-/*   Updated: 2015/02/27 14:27:09 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/27 15:29:27 by wide-aze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,11 @@ void			phi_eat_start_event(t_env *e, int id)
 void			phi_eat_end_event(t_env *e, int id)//callable depuis W
 {
 	e->phi_hp[id] = MAX_LIFE;
-	int	errl, errr;
-	errl = pthread_mutex_unlock(&e->mutex[P_LSID(id)]);
-	errr = pthread_mutex_unlock(&e->mutex[P_RSID(id)]);
-	qprintf("%d unlocked BOTH mutexwa %d %d\n", id
-			,P_RSID(id), P_LSID(id), errr, errl);
-
+//	int	errl, errr;
+//	errl = pthread_mutex_unlock(&e->mutex[P_LSID(id)]);
+//	errr = pthread_mutex_unlock(&e->mutex[P_RSID(id)]);
+//	qprintf("%d unlocked BOTH mutexwa %d %d\n", id
+//			,P_RSID(id), P_LSID(id), errr, errl);
 	e->llock[id] = ignored;
 	e->rlock[id] = ignored;
 	e->stick_state_change = 1;
