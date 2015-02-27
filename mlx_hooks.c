@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 14:05:05 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/27 13:07:03 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/02/27 14:59:52 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ static void		tick(t_env *e, time_t elapsedtime)
 static void		update_sticks_off_stats(t_env *e)
 {
 	int		i;
-
+//on peut en delete la moitier
+	//verifier les valeurs de retour des pthread partout sauf
 	i = 0;
 	while (i < 7)
 	{
