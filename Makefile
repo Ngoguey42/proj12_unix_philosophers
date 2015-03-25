@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/04 11:28:17 by ngoguey           #+#    #+#              #
-#    Updated: 2015/02/24 13:03:51 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/03/25 07:16:32 by ngoguey          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -15,18 +15,23 @@ NAME = philo
 # LIBFT
 LFTPATH = libft/
 LFTIPATH = -I $(LFTPATH)includes/
-LFT = -L $(LFTPATH) -lft
+LFT = -L$(LFTPATH) -lft
+
+#MINILIBX
+MLXPATH = minilibx_macos/
+MLXIPATH = -I $(MLXPATH)
+MLX = -framework OpenGL -framework AppKit -L$(MLXPATH) -lmlx
 
 OBJPATH = obj
 SRCPATH = .
 INCLUDE = -I ./
 
-CC = gcc
+CC = clang
 
-LIBS = $(LFT) -L/usr/X11/lib
-INCLUDES = $(INCLUDE) $(LFTIPATH)
+LIBS = $(LFT) $(MLX)
+INCLUDES = $(INCLUDE) $(LFTIPATH) $(MLXIPATH)
 
-BASEFLAGS = -Wall -Wextra -lmlx -lXext -lX11
+BASEFLAGS = -Wall -Wextra
 CFLAGS = $(BASEFLAGS) -Werror -O2
 DEBUGFLAGS = $(BASEFLAGS) -g3 -ggdb 
 
@@ -56,7 +61,7 @@ all: l $(NAME)
 
 $(NAME): $(OBJECTS)
 	@echo -e "$(Y)[COMPILING SH] $(G) $(CC) -o $@ $(CFLAGS) objs.o $(LIBS) $(E)"
-	$(CC) -o $@ $(CFLAGS) $(OBJECTS) $(INCLUDES) $(LIBS)
+	$(CC) -o $@ $(CFLAGS) $(OBJECTS) $(LIBS)
 	@echo -e "$(Y)[COMPILING SH]$(E)"
 
 $(OBJECTS): $(OBJPATH)/%.o : $(SRCPATH)/%.c
@@ -73,7 +78,8 @@ $(OBJECTS): $(OBJPATH)/%.o : $(SRCPATH)/%.c
 	$(eval W = 1)
 	@mkdir -p $(dir $@)
 	@echo -e "$(R)COMPILER$(E) -o $@ $(R)CFLAGS INCLUDES LIBS$(E) -c [...].c"
-	@$(CC) -o $@ $(CFLAGS) $(INCLUDES) $(LIBS) -c $<
+	$(CC) -o $@ $(CFLAGS) $(INCLUDES) -c $<
+
 
 clean:
 	$(RM) $(OBJPATH)
@@ -85,6 +91,9 @@ l:
 	@echo -e "$(Y)[COMPILING LIBFT] $(G) make -C $(LFTPATH) $(LFTCALL) $(E)"
 	@$(MAKE) -C $(LFTPATH) $(LFTCALL)
 	@echo -e "$(Y)[COMPILING LIBFT DONE]$(E)"
+	@echo -e "$(Y)[COMPILING MINILIB-X] $(G) make -C $(MLXPATH) $(E)"
+	@$(MAKE) -C $(MLXPATH)
+	@echo -e "$(Y)[COMPILING MINILIB-X DONE]$(E)"
 
 g: _g _gft all
 
