@@ -6,7 +6,7 @@
 /*   By: wide-aze <wide-aze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/23 10:38:03 by wide-aze          #+#    #+#             */
-/*   Updated: 2015/02/27 15:41:12 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/03/26 14:34:40 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,17 @@
 
 void			phi_leave_correctly(t_env *e, int nthrd, int nmutx, char *msg)
 {
+	char	*c;
+
 	e->play = 0;
-	phi_quit_mlx(&e->g);
 	while (nthrd-- > 7)
 		pthread_join(e->tid[nthrd], NULL);
 	while (nmutx-- > 7)
 		pthread_mutex_destroy(&e->mutex[nmutx]);
-	ft_dprintf(2, msg);
+	ft_dprintf(2, "%s", msg);
+	ft_dprintf(2, "Press enter to leave:\n");
+	get_next_line(0, &c);
+	phi_quit_mlx(&e->g);
 	exit(0);
 	return ;
 }

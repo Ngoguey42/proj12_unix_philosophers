@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 09:40:04 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/03/26 08:32:13 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/03/26 14:21:59 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void		philo(t_env *e, int id)
 	f[1] = &phi_rest_end_event;
 	f[2] = &phi_think_end_event;
 	f[3] = &phi_eat_end_event;
-	while (e->play)
+	while (e->play && e->t++ < 1000 * 1000 * 1000)
 	{
 		if (e->official_s[id] == think)
 		{
@@ -64,6 +64,7 @@ static void		philo(t_env *e, int id)
 		if (e->last_time >= e->act_end_time[id])
 			f[P_ACT](e, id);
 	}
+	e->play = 0;
 	return ;
 }
 

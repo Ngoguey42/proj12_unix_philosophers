@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/03/26 09:32:07 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/03/26 14:53:00 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@
 ** grep -v "_store_op"
 */
 
-# define MAX_LIFE 210
+# define MAX_LIFE 40
 # define EAT_T 13
-# define REST_T 1
-# define THINK_T 7
-# define TIMEOUT 300
+# define REST_T 15
+# define THINK_T 15
+# define TIMEOUT 120
 
 # define CAN_WAIT_TO_EAT 0
 
@@ -192,6 +192,7 @@ typedef struct	s_env
 	time_t		init_time;
 	time_t		last_time;
 	time_t		end_time;
+	t_ui64		t;
 
 	t_mutex		mutex[7];
 	t_owntype	own_type[7];

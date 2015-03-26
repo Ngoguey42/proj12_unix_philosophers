@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 14:05:05 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/27 15:42:11 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/03/26 14:34:54 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int				phi_loop_hook(void *envp)
 	time_t	curtime;
 
 	e = (t_env*)envp;
+	e->t = 0;
 	if (!e->play)
 		phi_leave_correctly(e, 7, 7, "");
 	if (time(&curtime) == (time_t)-1)
