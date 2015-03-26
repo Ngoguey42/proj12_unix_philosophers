@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 14:15:24 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/27 17:21:36 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/03/26 08:49:32 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static void	draw_row(const t_graph *g, int row, int pad, int rad)
 	i = 0;
 	while (i < rad * 2)
 	{
-		phi_puts_pix(g, ACOOTOI(i + pad, row, 0),(t_co){{0, 0, 75, 150}});//ACOOTOI fait planter la nm
+		phi_puts_pix(g, ACOOTOI(i + pad, row, 0),(t_co){{0, 0, 75, 150}});
+//ACOOTOI fait planter la norminette
 		i++;
 	}
 	return ;
@@ -29,7 +30,8 @@ void		phi_puttable(const t_graph *g)
 {
 	int		i;
 
-	i = TABLE_TOPPAD;//attention a pas avoir de libmath dans les macros
+	i = TABLE_TOPPAD;
+//attention a pas avoir de libmath dans les macros
 	while (i < TABLE_TOPPAD + TABLE_RADIUS * 2)
 		draw_row(g, i++, TABLE_LEFTPAD, TABLE_RADIUS);
 	return ;

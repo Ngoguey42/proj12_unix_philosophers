@@ -6,7 +6,7 @@
 /*   By: wide-aze <wide-aze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 09:32:06 by wide-aze          #+#    #+#             */
-/*   Updated: 2015/03/26 08:11:28 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/03/26 08:48:23 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void			phi_think_stolen_event(t_env *e, int id, int isright)
 void			phi_think_end_event(t_env *e, int id)
 {
 	if (((e->think_stick[id] == P_RSID(id)) ? e->rlock[id]
-		 : e->llock[id]) != stolen)
+		: e->llock[id]) != stolen)
 		pthread_mutex_unlock(&e->mutex[e->think_stick[id]]);
 	e->llock[id] = ignored;
 	e->rlock[id] = ignored;

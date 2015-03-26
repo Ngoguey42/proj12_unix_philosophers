@@ -6,11 +6,16 @@
 /*   By: wide-aze <wide-aze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 09:31:40 by wide-aze          #+#    #+#             */
-/*   Updated: 2015/02/27 16:00:11 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/03/26 08:47:54 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <phi.h>
+
+#define NEIGHBORS_EAT (P_LP_RLOCK(id) == eat_with && P_RP_LLOCK(id) == eat_with)
+#define RIGHT_P_LESS_HP (P_LPHP >= P_RPHP)
+#define RIGHT_P_NOT_EATING (P_LP_RLOCK(id) != eat_with)
+#define LEFT_FIRST ((NEIGHBORS_EAT && RIGHT_P_LESS_HP) || RIGHT_P_NOT_EATING)
 
 void			phi_waiteat_start_event(t_env *e, int id)
 {
@@ -18,28 +23,19 @@ void			phi_waiteat_start_event(t_env *e, int id)
 	e->stick_state_change = 1;
 	e->l_asked[P_RPID(id)] = 1;
 	e->r_asked[P_LPID(id)] = 1;
-	if (((P_LP_RLOCK(id) == eat_with && P_RP_LLOCK(id) == eat_with)
-	&& P_LPHP >= P_RPHP) || (P_LP_RLOCK(id) != eat_with))
+	if (LEFT_FIRST)
 	{
-		e->llock[id] = (e->llock[id] == eat_with) ? eat_with : waited;
-		if (e->llock[id] != eat_with)
-			pthread_mutex_lock(&e->mutex[P_LSID(id)]);
-		e->llock[id] = eat_with;
-		e->rlock[id] = (e->rlock[id] == eat_with) ? eat_with : waited;
-		if (e->rlock[id] != eat_with)
-			pthread_mutex_lock(&e->mutex[P_RSID(id)]);
-		e->rlock[id] = eat_with;
+		if (e->llock[id] != eat_with && (e->llock[id] = waited))
+			pthread_mutex_lock(&e->mutex[P_LSID(id)]), e->llock[id] = eat_with;
+		if (e->rlock[id] != eat_with && (e->rlock[id] = waited))
+			pthread_mutex_lock(&e->mutex[P_RSID(id)]), e->rlock[id] = eat_with;
 	}
 	else
 	{
-		e->rlock[id] = (e->rlock[id] == eat_with) ? eat_with : waited;
-		if (e->rlock[id] != eat_with)
-			pthread_mutex_lock(&e->mutex[P_RSID(id)]);
-		e->rlock[id] = eat_with;
-		e->llock[id] = (e->llock[id] == eat_with) ? eat_with : waited;
-		if (e->llock[id] != eat_with)
-			pthread_mutex_lock(&e->mutex[P_LSID(id)]);
-		e->llock[id] = eat_with;
+		if (e->rlock[id] != eat_with && (e->rlock[id] = waited))
+			pthread_mutex_lock(&e->mutex[P_RSID(id)]), e->rlock[id] = eat_with;
+		if (e->llock[id] != eat_with && (e->llock[id] = waited))
+			pthread_mutex_lock(&e->mutex[P_LSID(id)]), e->llock[id] = eat_with;
 	}
 	phi_waiteat_end_event(e, id);
 	return ;

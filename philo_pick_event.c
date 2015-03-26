@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/26 08:08:26 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/03/26 08:12:35 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/03/26 08:48:11 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,3 @@ void						phi_cant_wait_to_eat_pick(t_env *e, int id)
 	(void)id;
 	return ;
 }
-
