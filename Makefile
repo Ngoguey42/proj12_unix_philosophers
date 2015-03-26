@@ -6,7 +6,7 @@
 #    By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/04 11:28:17 by ngoguey           #+#    #+#              #
-#    Updated: 2015/03/25 07:16:32 by ngoguey          ###   ########.fr        #
+#    Updated: 2015/03/26 08:15:15 by ngoguey          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -43,7 +43,7 @@ LFTGRE = gre
 # Put new sources here / Mettre les nouvelles sources ici.
 SRCSFILES = main.c init_env.c com_mlx.c redraw.c\
 mlx_hooks.c philo.c putpix_mlx.c put_objects.c put_sticks.c put_strings.c\
- philo_eat.c philo_rest.c philo_think.c philo_wait.c
+ philo_eat.c philo_rest.c philo_think.c philo_wait.c philo_pick_event.c
 
 SRC = $(addprefix $(SRCPATH)/,$(SRCSFILES))
 OBJECTS = $(SRC:$(SRCPATH)/%.c=$(OBJPATH)/%.o)
@@ -61,24 +61,22 @@ all: l $(NAME)
 
 $(NAME): $(OBJECTS)
 	@echo -e "$(Y)[COMPILING SH] $(G) $(CC) -o $@ $(CFLAGS) objs.o $(LIBS) $(E)"
-	$(CC) -o $@ $(CFLAGS) $(OBJECTS) $(LIBS)
+	@$(CC) -o $@ $(CFLAGS) $(OBJECTS) $(LIBS)
 	@echo -e "$(Y)[COMPILING SH]$(E)"
 
 $(OBJECTS): $(OBJPATH)/%.o : $(SRCPATH)/%.c
-	@if [ $(W) -eq 0 ] ; then printf "$(R)%-10s$(E): %s\n$(R)%-10s$(E): %s\n$(R)%-10s$(E): %s\n$(R)%-10s$(E): %s\n"\
+	@if [ $(W) -eq 0 ] ; then printf "$(R)%-10s$(E): %s\n$(R)%-10s$(E): %s\n$(R)%-10s$(E): %s\n"\
 		"=>COMPILER"\
 		"$(CC)"\
 		"=>CFLAGS"\
 		"$(CFLAGS)"\
 		"=>INCLUDES"\
-		"$(INCLUDES)"\
-		"=>LIBS"\
-		"$(LIBS)" ;\
+		"$(INCLUDES)" ;\
 	fi
 	$(eval W = 1)
 	@mkdir -p $(dir $@)
-	@echo -e "$(R)COMPILER$(E) -o $@ $(R)CFLAGS INCLUDES LIBS$(E) -c [...].c"
-	$(CC) -o $@ $(CFLAGS) $(INCLUDES) -c $<
+	@echo -e "$(R)COMPILER$(E) -o $@ $(R)CFLAGS INCLUDES$(E) -c [...].c"
+	@$(CC) -o $@ $(CFLAGS) $(INCLUDES) -c $<
 
 
 clean:

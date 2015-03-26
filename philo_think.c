@@ -6,7 +6,7 @@
 /*   By: wide-aze <wide-aze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/24 09:32:06 by wide-aze          #+#    #+#             */
-/*   Updated: 2015/02/27 15:56:10 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/03/26 08:11:28 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,14 @@ void			phi_think_stolen_event(t_env *e, int id, int isright)
 void			phi_think_end_event(t_env *e, int id)
 {
 	if (((e->think_stick[id] == P_RSID(id)) ? e->rlock[id]
-	: e->llock[id]) != stolen)
+		 : e->llock[id]) != stolen)
 		pthread_mutex_unlock(&e->mutex[e->think_stick[id]]);
 	e->llock[id] = ignored;
 	e->rlock[id] = ignored;
 	e->stick_state_change = 1;
-	if ((P_LPHP >= P_HP || P_LP_RLOCK(id) == eat_with)
-	&& (P_RPHP > P_HP || P_RP_LLOCK(id) == eat_with))
-		phi_waiteat_start_event(e, id);
+	if (CAN_WAIT_TO_EAT)
+		phi_can_wait_to_eat_pick(e, id);
 	else
-		phi_rest_start_event(e, id);
+		phi_cant_wait_to_eat_pick(e, id);
 	return ;
 }

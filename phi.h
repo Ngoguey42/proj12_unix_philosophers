@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/27 17:30:41 by wide-aze         ###   ########.fr       */
+/*   Updated: 2015/03/26 08:25:27 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # define REST_T 1
 # define THINK_T 7
 # define TIMEOUT 250
+
+# define CAN_WAIT_TO_EAT 1
 
 # define LEAVE_MSG "Now, it is time... To DAAAAAAAANCE ! ! !\n"
 # define TIMEFAIL_MSG "Could not retrieve time\n"
@@ -146,7 +148,7 @@ typedef enum	e_owntype
 typedef enum	e_philock
 {
 	ignored = 0,
-	waited = 1, //processus figer
+	waited = 1,
 	think_with = 2,
 	stolen = 3,
 	eat_with = 4,
@@ -154,49 +156,57 @@ typedef enum	e_philock
 /*
 ** 'struct s_env' (1 instance, inside 'main' function)
 **		'g'				mlx vars + bool redraw
-**		'stick_s'		stick state (0 free/1 left/2 right)
-**		'mutex'			mutex lock for each thread
-**		'phi_s'			phi state
-**		'phi_hp'		phi hp
-**		'tid'			threads id
-**		'play'			boolean
-**		'saved_time'	time saved at init
-**		'act_time'		last action time left
-** *
-** 't_cenv'	== const struct s_env
-**		(use const t_env as soon as possible)
+**		'play'			stop game @ 0
+**		'stick_state_change'	strings redraw
+**		'init_time'		game start time
+**		'last_time'		last game's update
+**		'end_time'		game end time
+** ** sticks (mutexes)
+**		'mutex'			mutexes
+**		'own_type'		type of ownership
+**		'owner'			owner id (-1 of none)
+** ** philosophers (threads)
+**		'tid'			threads id (set by main thread)
+**		'phi_hp'		phi hp (set by main thread)
+**		'official_s'	official status, set by the philosopher himself
+**		'act_end_time'	end time of current action
+**		'eating_delta'	delta hp to gain each sec, while eating
+**		'llock'			philosopher's status toward left stick
+**		'rlock'			philosopher's status toward right stick
+**		'r_asked'		(set by right neighbor) when he requires the stick
+**		'l_asked'		(set by left neighbor) when he requires the stick
+**		'think_stick'	stick id when thinking
 */
 typedef pthread_mutex_t		t_mutex;
 typedef struct	s_env
 {
 	t_graph		g;
-	int			play;		//set par emulateur, update apres HPupdate
+	int			play;
 	int			stick_state_change;
 	time_t		init_time;
-	time_t		last_time; //game time, used to update HP
+	time_t		last_time;
 	time_t		end_time;
 //** **************************************************************************
 //** **************************************************************************
 //** **************************************************************************
-	t_mutex		mutex[7]; //RESSOURCE PARTAGEE
+	t_mutex		mutex[7];
 	t_owntype	own_type[7];
 	int			owner[7];
-	//initialiser à -1, reset à -1 quand dispo (pour le redraw)
 //** **************************************************************************
 //** **************************************************************************
 //** **************************************************************************
 	pthread_t	tid[7];
-	int			phi_hp[7];//set par l'emulateur
-	t_pstat		official_s[7];//set par le philo
+	int			phi_hp[7];
+	t_pstat		official_s[7];
 
-	time_t		act_end_time[7];//set par philo, on_action_start
-	int			eating_delta[7];//set par le philo, on_eat_start
+	time_t		act_end_time[7];
+	int			eating_delta[7];
 
 	t_philock	llock[7];
 	t_philock	rlock[7];
 
-	int			r_asked[7];//set par le philo de droite
-	int			l_asked[7];//set par le philo de gauche
+	int			r_asked[7];
+	int			l_asked[7];
 
 	int			think_stick[7];
 }				t_env;
@@ -294,6 +304,8 @@ void			phi_waiteat_start_event(t_env *e, int id);
 void			phi_waiteat_end_event(t_env *e, int id);
 void			phi_waitthink_start_event(t_env *e, int id);
 void			phi_waitthink_end_event(t_env *e, int id);
+void			phi_can_wait_to_eat_pick(t_env *e, int id);
+void			phi_cant_wait_to_eat_pick(t_env *e, int id);
 
 /*
 **Mlx
