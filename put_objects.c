@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 14:15:24 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/03/26 09:01:42 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/03/26 09:28:30 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void		phi_puttable(const t_graph *g)
 	int		i;
 
 	i = TABLE_TOPPAD;
-	//attention libmath
 	while (i < TABLE_TOPPAD + TABLE_RADIUS * 2)
 		draw_row(g, i++, TABLE_LEFTPAD, TABLE_RADIUS);
 	return ;

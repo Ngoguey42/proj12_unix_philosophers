@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/03/26 08:25:27 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/03/26 09:32:07 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,21 @@
 # include <ft_math.h>
 # include <pthread.h>
 # include <time.h>
-#include <ft_debug.h> //debug
+
+/*
+** nm philo | grep -v _phi_ | grep -v " L_" | grep -v "EH_fr" | grep -v "mlx" |
+** grep -v "__stack_" | grep -v "_ft_" | grep -v "OBJC_CLASS" | grep -v "_ptf" |
+** grep -v "_gl" | grep -v "_build_nb" | grep -v "OBJC" | grep -v "Win" |
+** grep -v "_store_op"
+*/
 
 # define MAX_LIFE 210
 # define EAT_T 13
 # define REST_T 1
 # define THINK_T 7
-# define TIMEOUT 250
+# define TIMEOUT 300
 
-# define CAN_WAIT_TO_EAT 1
+# define CAN_WAIT_TO_EAT 0
 
 # define LEAVE_MSG "Now, it is time... To DAAAAAAAANCE ! ! !\n"
 # define TIMEFAIL_MSG "Could not retrieve time\n"
@@ -186,31 +192,24 @@ typedef struct	s_env
 	time_t		init_time;
 	time_t		last_time;
 	time_t		end_time;
-//** **************************************************************************
-//** **************************************************************************
-//** **************************************************************************
+
 	t_mutex		mutex[7];
 	t_owntype	own_type[7];
 	int			owner[7];
-//** **************************************************************************
-//** **************************************************************************
-//** **************************************************************************
+
 	pthread_t	tid[7];
 	int			phi_hp[7];
 	t_pstat		official_s[7];
-
 	time_t		act_end_time[7];
 	int			eating_delta[7];
-
 	t_philock	llock[7];
 	t_philock	rlock[7];
-
 	int			r_asked[7];
 	int			l_asked[7];
-
 	int			think_stick[7];
 }				t_env;
 # define CS_ENV const struct s_env
+
 typedef CS_ENV	t_cenv;
 
 /*
@@ -229,6 +228,7 @@ typedef CS_ENV	t_cenv;
 # define S_LPID(sid) (sid == 6 ? 0 : sid + 1)
 # define P_RPID(pid) (pid == 0 ? 6 : pid - 1)
 # define P_LPID(pid) (pid == 6 ? 0 : pid + 1)
+
 /*
 ** ISLPICK, Is left philosopher picking.
 ** ISRPICK, Is right philosopher picking.
@@ -274,13 +274,6 @@ typedef struct	s_thread
 	int			id;
 }				t_thread;
 
-// typedef enum	e_spos
-// {
-	// right,
-	// available,
-	// left,
-// }				t_spos;
-
 /*
 ** *****************************************************************************
 ** *********************************PROTOTYPES**********************************
@@ -293,6 +286,7 @@ void			phi_leave_correctly(t_env *e, int nthrd, int nmutx, char *msg);
 /*
 ** Phi action
 */
+void			phi_start_end_event(t_env *e, int id);
 void			phi_eat_start_event(t_env *e, int id);
 void			phi_eat_end_event(t_env *e, int id);
 void			phi_rest_end_event(t_env *e, int id);
