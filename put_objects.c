@@ -6,21 +6,28 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 14:15:24 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/03/26 08:49:32 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/03/26 09:01:42 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <phi.h>
 
+/*
+** DO NOT REMOVE 'c' and 'co' in 'draw_row' !! (norminette)
+*/
+
 static void	draw_row(const t_graph *g, int row, int pad, int rad)
 {
-	int	i;
+	int			i;
+	t_co		c;
+	t_cooi		co;
 
+	(void)c;
+	(void)co;
 	i = 0;
 	while (i < rad * 2)
 	{
-		phi_puts_pix(g, ACOOTOI(i + pad, row, 0),(t_co){{0, 0, 75, 150}});
-//ACOOTOI fait planter la norminette
+		phi_puts_pix(g, ACOOTOI(i + pad, row, 0), (t_co){{0, 0, 75, 150}});
 		i++;
 	}
 	return ;
@@ -31,7 +38,7 @@ void		phi_puttable(const t_graph *g)
 	int		i;
 
 	i = TABLE_TOPPAD;
-//attention a pas avoir de libmath dans les macros
+	//attention libmath
 	while (i < TABLE_TOPPAD + TABLE_RADIUS * 2)
 		draw_row(g, i++, TABLE_LEFTPAD, TABLE_RADIUS);
 	return ;
