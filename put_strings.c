@@ -6,16 +6,16 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/20 11:27:27 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/02/25 07:15:42 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/03/26 07:57:41 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <phi.h>
 
-#define TOP_PAD ACOOTOI(10, -5, 0)
-#define BOT_PAD ACOOTOI(10, PHILO_RADIUS * 2 + 15, 0)
-#define MID_PAD ACOOTOI(27, PHILO_RADIUS + 4, 0)
-#define LOW_PAD ACOOTOI(-2, PHILO_RADIUS  * 2 - 7, 0)
+#define TOP_PAD ACOOTOI(-4, -20, 0)
+#define BOT_PAD ACOOTOI(-4, PHILO_RADIUS * 2 - 2, 0)
+#define MID_PAD ACOOTOI(25, PHILO_RADIUS - 23, 0)
+#define LOW_PAD ACOOTOI(-25, PHILO_RADIUS  * 2 - 32, 0)
 
 #define HP_TOP(P) P_ICOOADD((P), TOP_PAD)
 #define HP_BOT(P) P_ICOOADD((P), BOT_PAD)
