@@ -6,7 +6,7 @@
 /*   By: ngoguey <ngoguey@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/19 10:12:28 by ngoguey           #+#    #+#             */
-/*   Updated: 2015/03/26 14:53:00 by ngoguey          ###   ########.fr       */
+/*   Updated: 2015/03/27 09:19:19 by ngoguey          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@
 ** grep -v "_store_op"
 */
 
-# define MAX_LIFE 40
-# define EAT_T 13
-# define REST_T 15
-# define THINK_T 15
-# define TIMEOUT 120
+# define MAX_LIFE 50
+# define EAT_T 7
+# define REST_T 5
+# define THINK_T 3
+# define TIMEOUT 300
 
 # define CAN_WAIT_TO_EAT 0
 
