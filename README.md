@@ -1,7 +1,7 @@
 # Project #12 PHILOSOPHERS, Feb 2015
 >>>>> #####Dining philosophers problem. (group project)
 
-#####Grade ``(TBD/125)`` ``(TBD/125)*``
+#####Grade ``(123/100)`` ``(123/125)*``
 --------  -----------------------
 
 <br>
